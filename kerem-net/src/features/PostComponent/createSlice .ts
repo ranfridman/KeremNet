@@ -2,33 +2,42 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 
-interface IncrementAction {
-    type: 'post/increment';
-}
-
-interface DecrementAction extends PayloadAction<number> {
-    type: 'post/decrement';
-}
 interface PostState {
-    value: number;
+    text: string;
+    comments: string[];
+    likes: number;
+    creatorName: string;
+    date: Date;
 }
 
 const initialState: PostState = {
-    value: 0,
-};
-
+    text: '',
+    comments: [],
+    likes: 0,
+    creatorName: '',
+    date: new Date(),
+}
 const PostSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {
-        increment: (state) => {
-            state.value += 1; // Immer allows "mutating" state directly
+        setText: (state, action: PayloadAction<string>) => {
+            state.text = action.payload;
         },
-        decrement: (state, action: PayloadAction<number>) => {
-            state.value -= action.payload;
+        addComment: (state, action: PayloadAction<string>) => {
+            state.comments.push(action.payload);
+        },
+        addLike: (state, action: PayloadAction<number>) => {
+            state.likes += action.payload;
+        },
+        setCreatorName: (state, action: PayloadAction<string>) => {
+            state.creatorName = action.payload;
+        },
+        setDate: (state, action: PayloadAction<Date>) => {
+            state.date = action.payload;
         },
     },
 });
 
-export const { increment, decrement } = PostSlice.actions;
+export const { setText, addComment, addLike, setCreatorName, setDate } = PostSlice.actions;
 export default PostSlice.reducer;
