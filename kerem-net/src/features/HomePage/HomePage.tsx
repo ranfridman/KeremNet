@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PostComponent,{ PostComponentProps   } from "../PostComponent/PostComponent";
 import "./HomePage.css";
+import { Box } from "@mui/material";
 interface HomePageProps {
     initialPosts:PostComponentProps[]
 }
@@ -8,6 +9,7 @@ interface HomePageProps {
 const HomePage:React.FC<HomePageProps> = ({initialPosts}) => {
     const [posts, setPosts] = useState<PostComponentProps[]>(initialPosts);
     return (
+        <Box>
         <div className="home-page">
             <div className="home-page-title">KEREM.NET</div>
             <div className="posts-container">
@@ -16,7 +18,8 @@ const HomePage:React.FC<HomePageProps> = ({initialPosts}) => {
                 ))}
             </div>
 
-        </div>
+         </div>
+        </Box>
     )
 };
 

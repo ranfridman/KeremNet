@@ -1,4 +1,5 @@
 import './PostComponent.css';
+import { CardContent,Card } from '@mui/material';
 
 interface PostComponentProps {
     text: string;
@@ -10,22 +11,23 @@ interface PostComponentProps {
 
 const PostComponent:React.FC<PostComponentProps> = ({text, comments, likes, creatorName, date}) => {
   return (
-    <div className="post">
+      <Card className="post" variant="outlined">
+
       <div className="post-content">
         <p className="post-text">{text}</p>
       </div>
-      <div className="post-info">
+       <CardContent>
         <div className="post-likes">Likes: {likes}</div>
         <div className="post-creator">Creator: {creatorName}</div>
         <div className="post-date">Date: {date}</div>
-      </div>
+       </CardContent>
        {comments.length > 0 && <div className="post-comments">
        <div className="post-comments-title">Comments</div>
         {comments.map((comment, index) => (
           <div className="comment" key={index}>{comment}</div>
         ))}
       </div>}
-    </div>
+      </Card>
   );
 };
 
