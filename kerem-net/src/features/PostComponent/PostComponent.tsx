@@ -12,7 +12,7 @@ const PostComponent:React.FC<PostComponentProps> = ({text, comments, likes, crea
   return (
     <div className="post">
       <div className="post-content">
-        <div className="post-text">{text}</div>
+        <p className="post-text">{text}</p>
       </div>
       <div className="post-info">
         <div className="post-likes">Likes: {likes}</div>
