@@ -20,8 +20,14 @@
     },
     {
         "text": "test",
-        "comments": [
-        ],
+        "comments": [],
+        "likes": 0,
+        "creatorName": "test",
+        "date": "test"
+    },
+    {
+        "text": "test",
+        "comments": [],
         "likes": 0,
         "creatorName": "test",
         "date": "test"
