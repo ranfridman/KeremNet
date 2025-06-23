@@ -1,10 +1,11 @@
-.post{
+.post {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     width: 30vw;
 }
-.post-content{
+
+.post-content {
     width: 100%;
     height: 30vh;
     background-color: var(--primaryBackground);
@@ -12,25 +13,38 @@
     justify-content: center;
     align-items: center
 }
-.post-info{
+
+.post-text {
+    padding: 1vw;
+    text-align: center;
+    font-weight: 500;
+    font-family: sans-serif;
+    font-size: 2vw;
+}
+
+.post-info {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 1vw;
     border-top: 1px solid black;
 }
-.post-info>*{
+
+.post-info>* {
     font-weight: 500;
 }
-.post-likes{
+
+.post-likes {
     color: red;
 }
-.post-comments-title{
+
+.post-comments-title {
     font-weight: 600;
     text-align: center;
     text-decoration: wavy underline;
     text-decoration-color: var(--primary);
 }
-.comment{
+
+.comment {
     padding-left: 1vw;
 }

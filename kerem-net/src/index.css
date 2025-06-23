@@ -19,6 +19,7 @@ code {
 :root{
   --primary: #000000;
   --secondary: #ffffff;
+  --likeColor: #db2b2b;
   --primaryBackground: #dcdcdc;
   --secondaryBackground: #ffffff;
 }
