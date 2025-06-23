@@ -1,17 +1,13 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import PostComponent from "./features/PostComponent/PostComponent";
+import HomePage from "./features/HomePage/HomePage";
+import Data from "./Data/posts.json";
 function App() {
+  const posts = Data;
   return (
     <div className="App">
-      <PostComponent
-        text="text"
-        comments={["comment1", "comment2"]}
-        likes={10}
-        creatorName="creatorName"
-        date="date"
-      />
+      <HomePage initialPosts={posts}/>
     </div>
   );
 }

@@ -1,0 +1,17 @@
+.home-page{
+    margin-top: 1vw;
+    border: 0.5vw dotted var(--primary);
+    padding: 1vw;
+}
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    overflow-y: auto;
+}
+.home-page-title{
+    font-size: 2em;
+    color: var(--primary);
+}

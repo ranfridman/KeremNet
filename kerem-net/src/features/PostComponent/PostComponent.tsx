@@ -31,3 +31,4 @@ const PostComponent:React.FC<PostComponentProps> = ({text, comments, likes, crea
 
 
 export default PostComponent;
+export type { PostComponentProps };
