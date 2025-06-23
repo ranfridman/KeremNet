@@ -36,7 +36,7 @@
 }
 
 .post-likes {
-    color: red;
+    color: var(--likeColor);
 }
 
 .post-comments-title {

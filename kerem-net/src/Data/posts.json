@@ -1,19 +1,26 @@
 [
     {
-        "text": "te2st",
+        "text": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quos.",
         "comments": [
-            "test1",
-            "test2"
+            "test1"
         ],
-        "likes": 0,
+        "likes": 1323,
         "creatorName": "test",
         "date": "test"
     },
     {
-        "text": "te2st",
+        "text": "Another Post",
         "comments": [
-            "test1",
-            "test2"
+            "first comment",
+            "gibrish"
+        ],
+        "likes": 34,
+        "creatorName": "test",
+        "date": "3/3/2003"
+    },
+    {
+        "text": "test",
+        "comments": [
         ],
         "likes": 0,
         "creatorName": "test",
