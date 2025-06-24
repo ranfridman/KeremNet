@@ -32,7 +32,7 @@ const CommentSection = (comments:CommentSectionProps) => {
         <ListItemText primary="Comments" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout="auto" unmountOnExit height="10">
         <List component="div" disablePadding>
            {comments.comments.map((comment, index) => (
              <Comment key={index} {...comment} />
