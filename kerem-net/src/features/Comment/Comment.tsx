@@ -4,6 +4,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import React from "react";
 
 export interface CommentProps {
   commentContent: string;
@@ -11,7 +12,7 @@ export interface CommentProps {
   date: string;
 }
 
-const Comment = (comment:CommentProps) => {
+const Comment:React.FC<CommentProps> = (comment) => {
   return (
     <>
       <ListItemButton sx={{ pl: 4 }}>

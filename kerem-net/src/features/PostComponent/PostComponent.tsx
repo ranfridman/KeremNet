@@ -1,6 +1,6 @@
 import './PostComponent.css';
 import { CardContent,Card} from '@mui/material';
-import CommentSection,{CommentSectionProps} from './CommentSection';
+import CommentSection,{CommentSectionProps} from '../CommentSection/CommentSection';
 export interface PostComponentProps {
     text: string;
     comments: CommentSectionProps;
