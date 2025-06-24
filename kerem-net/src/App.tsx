@@ -15,6 +15,10 @@ function App() {
       </Header>
       <MainSection>
       <NavBar>
+        <h1>dsf</h1>
+        <h1>dsf</h1>
+        <h1>dsf</h1>
+        <h1>dsf</h1>
       </NavBar>
         
       <Page>
