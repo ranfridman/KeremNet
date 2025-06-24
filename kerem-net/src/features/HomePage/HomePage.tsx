@@ -1,21 +1,21 @@
 import { useState } from "react";
-import PostComponent, {
-  PostComponentProps,
-} from "../PostComponent/PostComponent";
+import Post, {
+  PostProps,
+} from "../Post/Post";
 import "./HomePage.css";
 import { Box } from "@mui/material";
 export interface HomePageProps {
-  initialPosts: PostComponentProps[];
+  initialPosts: PostProps[];
 }
 
 const HomePage: React.FC<HomePageProps> = ({ initialPosts }) => {
-  const [posts, setPosts] = useState<PostComponentProps[]>(initialPosts);
+  const [posts, setPosts] = useState<PostProps[]>(initialPosts);
   return (
     <Box>
       <div className="home-page">
         <div className="posts-container">
           {posts.map((post, index) => (
-            <PostComponent key={index} {...post} />
+            <Post key={index} {...post} />
           ))}
         </div>
       </div>

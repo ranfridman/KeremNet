@@ -11,14 +11,14 @@ export interface CommentProps {
   date: string;
 }
 
-const Comment: React.FC<CommentProps> = (comment) => {
+const Comment: React.FC<CommentProps> = ({userName,commentContent,date}) => {
   return (
     <>
       <ListItemButton sx={{ pl: 4 }}>
         <ListItemIcon>
-            <Avatar alt={comment.userName} src="/static/images/avatar/1.jpg" />
+            <Avatar alt={userName} src="/static/images/avatar/1.jpg" />
     </ListItemIcon>
-        <ListItemText primary={comment.commentContent} secondary={comment.date}/>
+        <ListItemText primary={commentContent} secondary={date}/>
       </ListItemButton>
     </>
   );

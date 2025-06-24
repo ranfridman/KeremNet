@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import HomePage, { HomePageProps } from "./features/HomePage/HomePage";
 import Data from "./Data/posts.json";
@@ -31,7 +31,7 @@ function App() {
             <img
               src={logo}
               alt="logo image"
-              style={{ width: "7vh", height: "7vh", margin: "0.5vh" }}
+              style={{ width: "5vh", height: "11vh", margin: "0.5vh" }}
             />
           ),
         }}

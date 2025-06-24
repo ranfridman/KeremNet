@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./PostComponent.css";
+import "./Post.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
@@ -13,8 +13,8 @@ import {
   Typography,
   List,
 } from "@mui/material";
-import CommentSection, { CommentSectionProps } from "../CommentSection/CommentSection";
-export interface PostComponentProps {
+import CommentSection, {CommentSectionProps} from "../CommentSection/CommentSection";
+export interface PostProps {
   text: string;
   comments: CommentSectionProps;
   likes: number;
@@ -22,20 +22,20 @@ export interface PostComponentProps {
   date: string;
 }
 
-const PostComponent: React.FC<PostComponentProps> = (props) => {
+const Post: React.FC<PostProps> = ({creatorName,date,text,comments,likes}) => {
   const [liked, setLiked] = useState(true);
   return (
     <Card className="post" variant="outlined">
       <>
         <ListItem sx={{ pl: 1 }}>
           <ListItemIcon>
-            <Avatar alt={props.creatorName} src="/static/images/avatar/1.jpg" />
+            <Avatar alt={creatorName} src="/static/images/avatar/1.jpg" />
           </ListItemIcon>
-          <ListItemText primary={props.creatorName} />
+          <ListItemText primary={creatorName} />
         </ListItem>
       </>
       <div className="post-content">
-        <p className="post-text">{props.text}</p>
+        <p className="post-text">{text}</p>
       </div>
       <CardContent>
         <div>
@@ -54,25 +54,22 @@ const PostComponent: React.FC<PostComponentProps> = (props) => {
               }}
             >
               {liked ? (
-                <FavoriteBorderIcon className="post-likes"  />
+                <FavoriteBorderIcon className="post-likes" />
               ) : (
                 <FavoriteIcon className="post-likes" />
               )}
-              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${props.likes}`} />
+              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${likes}`} />
             </ListItemIcon>
 
-            <ListItemText
-              primary={props.date}
-              sx={{ textAlign: "right" }}
-            />
+            <ListItemText primary={date} sx={{ textAlign: "right" }} />
           </Stack>
         </div>
-        {/* <div className="post-date">Date: {props.date}</div> */}
+        {/* <div className="post-date">Date: {date}</div> */}
       </CardContent>
 
-      <CommentSection comments={props.comments.comments} />
+      <CommentSection comments={comments.comments} />
     </Card>
   );
 };
 
-export default PostComponent;
+export default Post;

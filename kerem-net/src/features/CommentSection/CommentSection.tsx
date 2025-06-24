@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Comment,{CommentProps} from "../Comment/Comment";
+import Comment, { CommentProps } from "../Comment/Comment";
 import {
   Collapse,
   ListItemButton,
@@ -15,8 +15,7 @@ export interface CommentSectionProps {
   comments: CommentProps[];
 }
 
-
-const CommentSection: React.FC<CommentSectionProps> = (comments) => {
+const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -24,22 +23,28 @@ const CommentSection: React.FC<CommentSectionProps> = (comments) => {
   };
   return (
     <>
-    {comments.comments.length > 0 && <>
-      <ListItemButton onClick={handleClick}>
-        <ListItemIcon>
-          <RateReviewIcon />
-        </ListItemIcon>
-        <ListItemText primary={`${comments.comments.length} Comments`}/>
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding  sx={{ maxHeight: '25vh',overflow: 'auto'}}>
-           {comments.comments.map((comment, index) => (
-             <Comment key={index} {...comment} />
-           ))}
-        </List>
-      </Collapse>
-    </>}
+      {comments.length > 0 && (
+        <>
+          <ListItemButton onClick={handleClick}>
+            <ListItemIcon>
+              <RateReviewIcon />
+            </ListItemIcon>
+            <ListItemText primary={`${comments.length} Comments`} />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List
+              component="div"
+              disablePadding
+              sx={{ maxHeight: "25vh", overflow: "auto" }}
+            >
+              {comments.map((comment, index) => (
+                <Comment key={index} {...comment} />
+              ))}
+            </List>
+          </Collapse>
+        </>
+      )}
     </>
   );
 };
