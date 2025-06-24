@@ -3,20 +3,21 @@ import logo from "./logo.png";
 import "./App.css";
 import HomePage, { HomePageProps } from "./features/HomePage/HomePage";
 import Data from "./Data/posts.json";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
 import AppsIcon from "@mui/icons-material/Apps";
-import { red } from "@mui/material/colors";
 function App() {
   const posts: HomePageProps["initialPosts"] = Data;
+  const router = useDemoRouter('/page');
+
   const NAVIGATION: Navigation = [
     {
       kind: "header",
       title: "Navigation Bar",
     },
     {
-      segment: "page-2",
+      segment: "page",
       title: "Posts",
       icon: <AppsIcon />,
     },
@@ -25,6 +26,8 @@ function App() {
     <div className="App">
       <AppProvider
         navigation={NAVIGATION}
+        router={router}
+
         branding={{
           title: "KeremNet",
           logo: (
