@@ -16,7 +16,7 @@ const Comment = (comment:CommentProps) => {
     <>
       <ListItemButton sx={{ pl: 4 }}>
         <ListItemIcon>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt={comment.userName} src="/static/images/avatar/1.jpg" />
     </ListItemIcon>
         <ListItemText primary={comment.commentContent} secondary={comment.date}/>
       </ListItemButton>
