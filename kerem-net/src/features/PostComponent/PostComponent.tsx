@@ -1,31 +1,31 @@
 import './PostComponent.css';
-
-interface PostComponentProps {
+import { CardContent,Card} from '@mui/material';
+import CommentSection,{CommentSectionProps} from './CommentSection';
+export interface PostComponentProps {
     text: string;
-    comments: string[];
+    comments: CommentSectionProps;
     likes: number;
     creatorName: string;
     date: string;
 }
 
-const PostComponent:React.FC<PostComponentProps> = ({text, comments, likes, creatorName, date}) => {
+
+const PostComponent = (props: PostComponentProps) => {
   return (
-    <div className="post">
+      <Card className="post" variant="outlined">
+
       <div className="post-content">
-        <p className="post-text">{text}</p>
+        <p className="post-text">{props.text}</p>
       </div>
-      <div className="post-info">
-        <div className="post-likes">Likes: {likes}</div>
-        <div className="post-creator">Creator: {creatorName}</div>
-        <div className="post-date">Date: {date}</div>
-      </div>
-      <div className="post-comments">
-        <div className="post-comments-title">Comments</div>
-        {comments.map((comment, index) => (
-          <div className="comment" key={index}>{comment}</div>
-        ))}
-      </div>
-    </div>
+       <CardContent>
+        <div className="post-likes">Likes: {props.likes}</div>
+        <div className="post-creator">Creator: {props.creatorName}</div>
+        <div className="post-date">Date: {props.date}</div>
+       </CardContent>
+
+      <CommentSection comments={props.comments.comments} />
+      </Card>
+      
   );
 };
 

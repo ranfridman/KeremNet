@@ -1,17 +1,26 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import PostComponent from "./features/PostComponent/PostComponent";
+import PostComponent, {
+  PostComponentProps,
+} from "./features/PostComponent/PostComponent";
 function App() {
+  const Post: PostComponentProps = {
+    text: "text",
+    comments: {
+      comments: [
+        { commentContent: "comment1" },
+        { commentContent: "comment2" },
+        { commentContent: "comment2" },
+        { commentContent: "comment3" },
+      ]
+    },
+    likes: 10,
+    creatorName: "creatorName",
+    date: "date",
+  };
   return (
     <div className="App">
-      <PostComponent
-        text="text"
-        comments={["comment1", "comment2"]}
-        likes={10}
-        creatorName="creatorName"
-        date="date"
-      />
+      <PostComponent {...Post} />
     </div>
   );
 }
