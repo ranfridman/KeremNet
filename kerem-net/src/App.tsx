@@ -8,11 +8,12 @@ function App() {
     text: "text",
     comments: {
       comments: [
-        { commentContent: "comment1" },
-        { commentContent: "comment2" },
-        { commentContent: "comment2" },
-        { commentContent: "comment3" },
-      ]
+        { commentContent: "comment1", userName: "userName", date: "date" },
+        { commentContent: "comment2", userName: "userName", date: "date" },
+        { commentContent: "comment2", userName: "userName", date: "date" },
+        { commentContent: "comment2", userName: "userName", date: "date" },
+        { commentContent: "comment2", userName: "userName", date: "date" },
+      ],
     },
     likes: 10,
     creatorName: "creatorName",
