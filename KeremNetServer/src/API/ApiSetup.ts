@@ -19,6 +19,13 @@ export const apiSetup = (storage: InMemoryStorage) => {
         likes: 0,
         comments: []
     });
+    storage.create("posts", {
+        userName: "req234ASDF",
+        content: "reqASD234FSDF",
+        date: "3.3.3",
+        likes: 0,
+        comments: []
+    });
     const user = storage.find("users", (item: any) => item.userName == "reqASDF");
     if (user.length > 0) {
         user[0].posts.push(postId);
