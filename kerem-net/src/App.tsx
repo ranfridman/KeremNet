@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import PostComponent, {
-  PostComponentProps,
-} from "./features/PostComponent/PostComponent";
+import Post, {
+  PostProps,
+} from "./features/Post/Post";
 function App() {
-  const Post: PostComponentProps = {
+  const Posts: PostProps = {
     text: "text",
     comments: {
       comments: [
@@ -21,7 +21,7 @@ function App() {
   };
   return (
     <div className="App">
-      <PostComponent {...Post} />
+      <Post {...Posts} />
     </div>
   );
 }

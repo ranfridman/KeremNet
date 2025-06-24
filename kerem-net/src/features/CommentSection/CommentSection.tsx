@@ -16,7 +16,7 @@ export interface CommentSectionProps {
 }
 
 
-const CommentSection:React.FC<CommentSectionProps> = (comments) => {
+const CommentSection:React.FC<CommentSectionProps> = ({comments}) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -24,7 +24,7 @@ const CommentSection:React.FC<CommentSectionProps> = (comments) => {
   };
   return (
     <>
-    {comments.comments.length > 0 && <>
+    {comments.length > 0 && <>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
           <RateReviewIcon />
@@ -34,7 +34,7 @@ const CommentSection:React.FC<CommentSectionProps> = (comments) => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding  sx={{ maxHeight: '25vh',overflow: 'auto'}}>
-           {comments.comments.map((comment, index) => (
+           {comments.map((comment, index) => (
              <Comment key={index} {...comment} />
            ))}
         </List>
