@@ -13,7 +13,7 @@ import {
   Typography,
   List,
 } from "@mui/material";
-import CommentSection, { CommentSectionProps } from "./CommentSection";
+import CommentSection, { CommentSectionProps } from "../CommentSection/CommentSection";
 export interface PostComponentProps {
   text: string;
   comments: CommentSectionProps;
@@ -22,7 +22,7 @@ export interface PostComponentProps {
   date: string;
 }
 
-const PostComponent = (props: PostComponentProps) => {
+const PostComponent: React.FC<PostComponentProps> = (props) => {
   const [liked, setLiked] = useState(true);
   return (
     <Card className="post" variant="outlined">

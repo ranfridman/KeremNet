@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
 import AppsIcon from "@mui/icons-material/Apps";
+import { red } from "@mui/material/colors";
 function App() {
   const posts: HomePageProps["initialPosts"] = Data;
   const NAVIGATION: Navigation = [
@@ -20,17 +21,6 @@ function App() {
       icon: <AppsIcon />,
     },
   ];
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#22817E",
-      },
-      secondary: {
-        main: "#22817E",
-      },
-    },
-  });
-
   return (
     <div className="App">
       <AppProvider
@@ -45,7 +35,6 @@ function App() {
             />
           ),
         }}
-        theme={theme}
       >
         <DashboardLayout>
           <HomePage initialPosts={posts} />

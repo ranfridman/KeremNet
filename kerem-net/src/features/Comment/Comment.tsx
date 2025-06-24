@@ -11,7 +11,7 @@ export interface CommentProps {
   date: string;
 }
 
-const Comment = (comment:CommentProps) => {
+const Comment: React.FC<CommentProps> = (comment) => {
   return (
     <>
       <ListItemButton sx={{ pl: 4 }}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Comment,{CommentProps} from "./Comment";
+import Comment,{CommentProps} from "../Comment/Comment";
 import {
   Collapse,
   ListItemButton,
@@ -16,7 +16,7 @@ export interface CommentSectionProps {
 }
 
 
-const CommentSection = (comments:CommentSectionProps) => {
+const CommentSection: React.FC<CommentSectionProps> = (comments) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
