@@ -4,7 +4,7 @@ import Post, {
   PostProps,
 } from "./features/Post/Post";
 function App() {
-  const Posts: PostProps = {
+  const posts: PostProps = {
     text: "text",
     comments: {
       comments: [
@@ -21,7 +21,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Post {...Posts} />
+      <Post {...posts} />
     </div>
   );
 }
