@@ -16,14 +16,14 @@ export const apiSetup = (storage: InMemoryStorage) => {
         userName: "reqASDF",
         content: "reqASD234FSDF",
         date: "3.3.3",
-        likes: 0,
+        likes: [],
         comments: []
     });
     storage.create("posts", {
         userName: "req234ASDF",
         content: "reqASD234FSDF",
         date: "3.3.3",
-        likes: 0,
+        likes: [],
         comments: []
     });
     const user = storage.find("users", (item: any) => item.userName == "reqASDF");

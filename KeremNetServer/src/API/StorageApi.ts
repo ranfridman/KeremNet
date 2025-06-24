@@ -1,5 +1,5 @@
 import express from "express";
-import { Request,response } from "express";
+import { Request, response } from "express";
 import { InMemoryStorage } from "../Storage/mamas-storage";
 import { apiSetup } from "./ApiSetup";
 
@@ -27,7 +27,7 @@ app.post("/users/create/", (req, res) => {
 
 //Get all users id
 app.get("/users/", (req: any, res: any) => {
-  const newTest = storage.where("users", { });
+  const newTest = storage.where("users", {});
   if (newTest.length === 0) {
     return res.status(404).json({ message: "User was not found" });
   } else {
@@ -39,7 +39,7 @@ app.get("/users/", (req: any, res: any) => {
 app.get("/users/:userId/posts/", (req: any, res: any) => {
   const users = storage.where("users", { id: req.params.userId });
   console.log(req.params.userId);
-  
+
   if (users.length === 0) {
     return res.status(404).json({ message: "User was not found" });
   } else {
@@ -47,12 +47,15 @@ app.get("/users/:userId/posts/", (req: any, res: any) => {
   }
 });
 //Get all posts
-app.get("/posts/", (req: any, res: any) => {
-  const newTest = storage.where("posts", { });
+app.get("/posts/:limit/:offset/", (req: any, res: any) => {
+  const newTest = storage.where("posts", {});
+
+  let limit = Number(req.params.limit) > 0 ? Number(req.params.limit) : 1;
+  let offset = Number(req.params.offset) >= 0 ? Number(req.params.offset) : 0;
   if (newTest.length === 0) {
     return res.status(404).json({ message: "Cannot find posts" });
   } else {
-    return res.status(200).json(newTest.map((item: any) => item.id));
+    return res.status(200).json(newTest.slice(offset, offset + limit));
   }
 });
 
@@ -70,12 +73,12 @@ app.get("/post/:postId/", (req: any, res: any) => {
 //update values of post
 app.put("/post/:postId/", (req: any, res: any) => {
   console.log(req.query.updated);
-  
+
   const newTest = storage.where("posts", { id: req.params.postId });
   if (newTest.length === 0) {
     return res.status(404).json({ message: "Post was not found" });
   } else {
-    console.log( Object.keys(JSON.parse(req.query.updated)));
+    console.log(Object.keys(JSON.parse(req.query.updated)));
     newTest[0] = Object.assign(newTest[0], JSON.parse(req.query.updated));
     return res.status(200).json(newTest[0]);
   }
@@ -87,7 +90,7 @@ app.post("/post/create/", (req, res) => {
     userName: req.query.userName,
     content: req.query.content,
     date: req.query.date,
-    likes: 0,
+    likes: new Set(),
     comments: []
   });
   const user = storage.find("users", (item: any) => item.id == newPost.id);
@@ -95,11 +98,30 @@ app.post("/post/create/", (req, res) => {
     user[0].posts.push(newPost.id);
   }
   res.status(201).json(newPost);
-});    
+});
 
+//toggle like a post
+app.post("/post/:postId/like/", (req: any, res: any) => {
+  const post = storage.where("posts", { id: req.params.postId });
+  const user = storage.where("user", { id: req.query.userId });
+  if (post.length === 0) {
+    return res.status(404).json({ message: "Post was not found" });
+  }
+  else if (user.length === 0) {
+    return res.status(404).json({ message: "User was not found" });
+  }
+  else {
+    if (post[0].likes.includes(user[0].id)) {
+      post[0].likes.remove(user[0].id);
+    } else {
+      post[0].likes.add(user[0].id);
+    }
+    return res.status(200).json(post[0]);
+  }
+});
 
 //Delete post
-app.delete("/post/:postId/", (req:any, res:any) => {
+app.delete("/post/:postId/", (req: any, res: any) => {
   const deletedPosts = storage.remove("Posts", (item: any) => item.id == req.params.postId);
   const deletedPost = deletedPosts[0];
   if (!deletedPost) {

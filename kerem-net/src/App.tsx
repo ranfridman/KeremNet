@@ -1,51 +1,43 @@
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import HomePage, { HomePageProps } from "./features/HomePage/HomePage";
 import Data from "./Data/posts.json";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
 import AppsIcon from "@mui/icons-material/Apps";
 function App() {
   const posts: HomePageProps["initialPosts"] = Data;
+  const router = useDemoRouter('/page');
+
   const NAVIGATION: Navigation = [
     {
       kind: "header",
       title: "Navigation Bar",
     },
     {
-      segment: "page-2",
+      segment: "page",
       title: "Posts",
       icon: <AppsIcon />,
     },
   ];
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#22817E",
-      },
-      secondary: {
-        main: "#22817E",
-      },
-    },
-  });
-
   return (
     <div className="App">
       <AppProvider
         navigation={NAVIGATION}
+        router={router}
+
         branding={{
           title: "KeremNet",
           logo: (
             <img
               src={logo}
               alt="logo image"
-              style={{ width: "7vh", height: "7vh", margin: "0.5vh" }}
+              style={{ width: "2.5em", height: "3em", margin: "0.5vh" }}
             />
           ),
         }}
-        theme={theme}
       >
         <DashboardLayout>
           <HomePage initialPosts={posts} />
