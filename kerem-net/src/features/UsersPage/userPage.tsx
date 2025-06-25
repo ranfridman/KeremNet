@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import User, { UserProps } from "../User/user";
-import { Grid, TextField, Container, Card } from "@mui/material";
+import { Grid, TextField, Container, Card ,CircularProgress} from "@mui/material";
 import "./UserPage.css";
 import api from "../../Scripts/API/Api";
 
@@ -50,6 +50,7 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
           }}
         />
       </Card>
+      
       <Grid
         className="users-grid"
         spacing={2}
@@ -57,6 +58,7 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
         flexWrap="wrap"
         sx={{ padding: 2, gap: 2 }}
       >
+        {!hasLoadedUsers && (<CircularProgress />)}
         {filteredUsers.map((user, index) => (
           <User key={index} {...user} />
         ))}

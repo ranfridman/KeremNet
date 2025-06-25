@@ -36,7 +36,7 @@ const User: React.FC<UserProps> = ({
     <Card className="user scale" variant="elevation">
       <Stack direction={"row"} sx={{ pl: 1 }}>
         <ListItem>
-          <Avatar alt={username} src=""></Avatar>
+          <Avatar alt={username} ></Avatar>
         </ListItem>
         <ListItem>
           <ListItemText primary={username} secondary={biography} />
