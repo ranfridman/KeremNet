@@ -16,10 +16,10 @@ export interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setOIspen] = useState(false);
 
   const handleClick = () => {
-    setOpen(!open);
+    setOIspen(!isOpen);
   };
   return (
     <>
@@ -30,9 +30,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
               <RateReviewIcon />
             </ListItemIcon>
             <ListItemText primary={`${comments.length} Comments`} />
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {isOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open}>
+          <Collapse in={isOpen}>
             <List
               component="div"
               disablePadding

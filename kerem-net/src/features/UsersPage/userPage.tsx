@@ -8,6 +8,14 @@ export interface UserPageProps {
 
 const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
   const [users, setUsers] = useState(initialUsers);
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setUsers(
+      initialUsers.filter((user) =>
+        user.userName.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
+  };
+
 
   return (
     <Container className="users-page">
@@ -15,15 +23,7 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
         <TextField
           label="Enter username"
           variant="outlined"
-          onChange={(e) => {
-            setUsers(
-              initialUsers.filter((user) =>
-                user.userName
-                  .toLowerCase()
-                  .includes(e.target.value.toLowerCase())
-              )
-            );
-          }}
+          onChange={(e) => {handleTextChange(e)}}
         />
       </Card>
       <Grid

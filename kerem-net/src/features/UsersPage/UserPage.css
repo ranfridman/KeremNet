@@ -11,7 +11,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* max-width: 100%; */
 }
 .users-page-container{
     display: flex;
