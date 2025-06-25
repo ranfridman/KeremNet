@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 //Create new post
-app.post("/users/create/", (req, res) => {
+app.post("/api/users/create/", (req, res) => {
   const newUser = storage.create("users", {
     userName: req.query.userName,
     userProfileImage: req.query.userProfileImage,
@@ -26,7 +26,7 @@ app.post("/users/create/", (req, res) => {
 });
 
 //Get all users id
-app.get("/users/", (req: any, res: any) => {
+app.get("/api/users/", (req: any, res: any) => {
   const newTest = storage.where("users", {});
   if (newTest.length === 0) {
     return res.status(404).json({ message: "User was not found" });
@@ -36,7 +36,7 @@ app.get("/users/", (req: any, res: any) => {
 });
 
 //Get all users posts
-app.get("/users/:userId/posts/", (req: any, res: any) => {
+app.get("/api/users/:userId/posts/", (req: any, res: any) => {
   const users = storage.where("users", { id: req.params.userId });
   console.log(req.params.userId);
 
@@ -47,7 +47,7 @@ app.get("/users/:userId/posts/", (req: any, res: any) => {
   }
 });
 //Get all posts
-app.get("/posts/:limit/:offset/", (req: any, res: any) => {
+app.get("/api/posts/:limit/:offset/", (req: any, res: any) => {
   const newTest = storage.where("posts", {});
 
   let limit = Number(req.params.limit) > 0 ? Number(req.params.limit) : 1;
@@ -61,7 +61,7 @@ app.get("/posts/:limit/:offset/", (req: any, res: any) => {
 
 
 //Get post by id
-app.get("/post/:postId/", (req: any, res: any) => {
+app.get("/api/post/:postId/", (req: any, res: any) => {
   const newTest = storage.where("posts", { id: req.params.postId });
   if (newTest.length === 0) {
     return res.status(404).json({ message: "Post was not found" });
@@ -71,7 +71,7 @@ app.get("/post/:postId/", (req: any, res: any) => {
 });
 
 //update values of post
-app.put("/post/:postId/", (req: any, res: any) => {
+app.put("/api/post/:postId/", (req: any, res: any) => {
   console.log(req.query.updated);
 
   const newTest = storage.where("posts", { id: req.params.postId });
@@ -85,7 +85,7 @@ app.put("/post/:postId/", (req: any, res: any) => {
 })
 
 //create new post
-app.post("/post/create/", (req, res) => {
+app.post("/api/post/create/", (req, res) => {
   const newPost = storage.create("posts", {
     userName: req.query.userName,
     content: req.query.content,
@@ -101,7 +101,7 @@ app.post("/post/create/", (req, res) => {
 });
 
 //toggle like a post
-app.post("/post/:postId/like/", (req: any, res: any) => {
+app.post("/api/post/:postId/like/", (req: any, res: any) => {
   const post = storage.where("posts", { id: req.params.postId });
   const user = storage.where("users", { id: req.query.userId });
   if (post.length === 0) {
@@ -123,7 +123,7 @@ app.post("/post/:postId/like/", (req: any, res: any) => {
 
 
 //toggle follow user
-app.post("/user/:userId/follow/", (req: any, res: any) => {
+app.post("/api/user/:userId/follow/", (req: any, res: any) => {
   const following = storage.where("users", { id: req.query.userId });
   const follower = storage.where("users", { id: req.params.followerId });
   if (following.length === 0 || follower.length === 0) {
@@ -143,7 +143,7 @@ app.post("/user/:userId/follow/", (req: any, res: any) => {
 
 
 //Delete post
-app.delete("/post/:postId/", (req: any, res: any) => {
+app.delete("/api/post/:postId/", (req: any, res: any) => {
   const deletedPosts = storage.remove("Posts", (item: any) => item.id == req.params.postId);
   const deletedPost = deletedPosts[0];
   if (!deletedPost) {

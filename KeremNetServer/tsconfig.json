@@ -108,6 +108,14 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+  "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  },
+  // Explicitly include only the desired source files/folders
+  "include": [
+    "src/**/*"
+  ],
+  // Exclude the problematic directory to avoid file not found errors
+  "exclude": [
+    "NestJsApi/kerem-net-nest"
+  ]
 }
