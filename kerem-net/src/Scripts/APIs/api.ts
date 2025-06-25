@@ -1,4 +1,4 @@
-export const apiData = fetch('/api/data') // Relative path works due to proxy
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
+const axiosInstance = axios.create({
+    baseURL: "https://jsonplaceholder.typicode.com",
+    timeout: 1000,
+});

@@ -23,14 +23,10 @@ export class UsersController {
 
     @Post("/follow")//Post /user
     toggleFollow( @Body() body:{followerId: string, userId: string}): any {
-        console.log(body);
-        
         return this.usersService.toggleFollow(body.userId, body.followerId);
     }
     @Post()//Post /user
-    createUser(@Body() user: CreateUserDto,@Req() req:Request): User  {
-        console.log(req.body);
-        
+    createUser(@Body() user: CreateUserDto): User  {
         return this.usersService.createUser(user);
     }
 
