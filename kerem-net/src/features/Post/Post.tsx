@@ -41,7 +41,7 @@ const Post: React.FC<PostProps> = ({
         </ListItem>
       </>
       <div className="post-content">
-        <p className="post-text">{text}</p>
+        <ListItemText className="post-text" primary={text} />
       </div>
       <CardContent>
         <div>
