@@ -7,6 +7,8 @@ import { Injectable } from '@nestjs/common';
 import { v4 } from "uuid";
 import { User, UsersService } from '../users/users.service';
 import postsDate from '../Data/posts.json'
+import { CreatePostDto } from './posts.controller';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 
 export interface PostInfo {
@@ -38,7 +40,7 @@ export class PostsService {
     getPostById(id: string): PostInfo | string {
         return this.posts.find(post => post.id === id) || 'Post was not found';
     }
-    createPost(post: { text: string, userId: string, creatorName: string }): PostInfo {
+    createPost(post: CreatePostDto): PostInfo {
         const newpost: PostInfo = {
             id: (v4() as string),
             userId: post.userId,
@@ -55,7 +57,7 @@ export class PostsService {
         const user: User | undefined = this.usersService.getUserById(userId);
         const post = this.getPostById(postId);
         if (!user || !post || typeof post === 'string') {
-            return null;
+            throw new NotFoundException('Resource not found');
         } else {
             if (user.liked.includes(postId)) {
                 user.liked = user.liked.filter(id => id !== postId);

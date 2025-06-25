@@ -6,9 +6,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { rawBody: true });
-  app.set('trust proxy', true); // Or a number indicating the number of hops
+  app.set('trust proxy', true); 
   app.enableCors();
-  // const app = await NestFactory.create(AppModule);
   app.use(express.json());
 
   await app.listen(process.env.PORT ?? 3002);
