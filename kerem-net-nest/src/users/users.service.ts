@@ -50,7 +50,7 @@ export class UsersService {
         if (!user || !follower) {
             return null;
         }
-        if (user.followers.includes(followerId)) {
+        if (user.followers.includes(followerId)) {  
             user.followers = user.followers.filter(id => id !== followerId);
             follower.following = follower.following.filter(id => id !== userId);
         } else {
@@ -58,7 +58,7 @@ export class UsersService {
             follower.following.push(userId);
         }
 
-        return { user, follower };
+        return follower;
     }
 
     updateUser(id: string, items: any) {
