@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./Post.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { PostContent } from "../PostContent/PostContent";
+
 import {
   ListItemText,
   Avatar,
@@ -40,9 +42,7 @@ const Post: React.FC<PostProps> = ({
           <ListItemText primary={creatorName} />
         </ListItem>
       </>
-      <div className="post-content">
-        <ListItemText className="post-text" primary={text} />
-      </div>
+      <PostContent text={text} />
       <CardContent>
         <div>
           <Stack
