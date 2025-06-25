@@ -1,7 +1,10 @@
+import axios from 'axios';
 
+const API_ADDRESS: string = "http://localhost:3002/";
 
-const API:string = "http://localhost:3000/";
-const datafetch(API: string)
-    .then((response: Response) => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error fetching data:', error));
+const api = axios.create({
+    baseURL: API_ADDRESS,
+    timeout: 1000,
+});
+
+export default api;     

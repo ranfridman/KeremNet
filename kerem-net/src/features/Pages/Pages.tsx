@@ -1,13 +1,13 @@
 import HomePage, { HomePageProps } from "../HomePage/HomePage";
 import UserPage from "../UsersPage/userPage";
-import postsData from "../../Data/posts.json";
-import usersData from "../../Data/users.json";
-const posts: HomePageProps["initialPosts"] = postsData;
+import axios from "axios";
+
+const posts: HomePageProps["initialPosts"] = [];
 
 
 const Pages: Record<string, React.ReactElement> = {
   "/posts": <HomePage initialPosts={posts} />,
-  "/users": <UserPage initialUsers={usersData} />,
+  "/users": <UserPage initialUsers={[]} />,
   "/profile": <div>Profile Page</div>,
 };
 

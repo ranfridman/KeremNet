@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 import { v4 } from "uuid";
 import { Injectable } from '@nestjs/common';
-
+import usersDate from '../Data/users.json'
 export interface User {
     id: string,
     username: string,
@@ -13,12 +13,10 @@ export interface User {
 }
 
 
+
 @Injectable()
 export class UsersService {
-    private users: User[] = [{
-        id: '1', biography: 'hello', followers: [], following: [], liked: [], username: 'kerem'
-    }
-    ]
+    private users: User[] = usersDate as User[];
 
     getAllUsers(): User[] {
         return this.users;

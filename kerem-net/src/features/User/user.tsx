@@ -10,25 +10,24 @@ import {
   ListItemText,
   ListItem,
   Stack,
-  List,
   Paper,
-  Typography,
   Chip,
 } from "@mui/material";
 
 export interface UserProps {
-  userName: string;
+  id: string;
+  username: string;
   biography: string;
-  followers: number;
-  following: number;
+  followers: [];
+  following: [];
   numberOfPosts: number;
-  liked: number;
+  liked: [];
 }
 
 const User: React.FC<UserProps> = ({
-  userName,
+  username,
   biography,
-  numberOfPosts,
+  numberOfPosts=3,
   liked,
   followers,
   following,
@@ -37,10 +36,10 @@ const User: React.FC<UserProps> = ({
     <Card className="user scale" variant="elevation">
       <Stack direction={"row"} sx={{ pl: 1 }}>
         <ListItem>
-          <Avatar alt={userName}></Avatar>
+          <Avatar alt={username} src=""></Avatar>
         </ListItem>
         <ListItem>
-          <ListItemText primary={userName} secondary={biography} />
+          <ListItemText primary={username} secondary={biography} />
         </ListItem>
       </Stack>
       <Divider />

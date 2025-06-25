@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable prettier/prettier */
-import { Injectable, Inject, forwardRef } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { v4 } from "uuid";
 import { User, UsersService } from '../users/users.service';
+import postsDate from '../Data/posts.json'
 
 
 export interface PostInfo {
@@ -23,22 +27,11 @@ export interface PostInfo {
 }
 @Injectable()
 export class PostsService {
-    // constructor(@Inject(forwardRef(() => UsersService)) private usersService: UsersService) { }
-      constructor(private usersService: UsersService) {}
-
-
-    private posts: PostInfo[] = [{
-        creatorName: 'kerem',
-        id: '1',
-        userId: '1',
-        text: '',
-        comments: { comments: [] },
-        likes: [],
-        date: ''
-    }
-    ]
-
+    constructor(private usersService: UsersService) { }
+    private posts: PostInfo[] = postsDate;
     getAllPosts(): PostInfo[] {
+        console.log(this.posts);
+
         return this.posts;
     }
 
@@ -59,7 +52,7 @@ export class PostsService {
         return newpost;
     }
     toggleLike(userId: string, postId: string): any {
-        const user:User|undefined = this.usersService.getUserById(userId);
+        const user: User | undefined = this.usersService.getUserById(userId);
         const post = this.getPostById(postId);
         if (!user || !post || typeof post === 'string') {
             return null;

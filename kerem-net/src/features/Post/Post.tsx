@@ -17,7 +17,7 @@ import CommentSection, {
 export interface PostProps {
   text: string;
   comments: CommentSectionProps;
-  likes: number;
+  likes: string[];
   creatorName: string;
   date: string;
 }
@@ -64,7 +64,7 @@ const Post: React.FC<PostProps> = ({
               ) : (
                 <FavoriteIcon className="post-likes" />
               )}
-              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${likes}`} />
+              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${likes.length}`} />
             </ListItemIcon>
 
             <ListItemText primary={date} sx={{ textAlign: "right" }} />
