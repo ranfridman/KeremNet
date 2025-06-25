@@ -16,10 +16,10 @@ export interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
-  const [isOpen, setOIspen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    setOIspen(!isOpen);
+    setIsOpen(!isOpen);
   };
   return (
     <>
