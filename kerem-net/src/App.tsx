@@ -2,60 +2,23 @@ import React from "react";
 import logo from "./logo.png";
 import "./App.css";
 import HomePage, { HomePageProps } from "./features/HomePage/HomePage";
-import Data from "./Data/posts.json";
-import { DemoProvider, useDemoRouter } from "@toolpad/core/internal";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
-import GroupIcon from "@mui/icons-material/Group";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import UserPage from "./features/UsersPage/userPage";
-function App() {
-  const posts: HomePageProps["initialPosts"] = Data;
-  const router = useDemoRouter("/posts");
+import postsData from "./Data/posts.json";
+import usersData from "./Data/users.json";
+import { useDemoRouter } from "@toolpad/core/internal";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { AppProvider } from "@toolpad/core/AppProvider";
 
-  const NAVIGATION: Navigation = [
-    {
-      kind: "header",
-      title: "Navigation Bar",
-    },
-    {
-      segment: "posts",
-      title: "Posts",
-      icon: <DashboardIcon />,
-    },
-    {
-      segment: "users",
-      title: "Users",
-      icon: <GroupIcon />,
-    },
-    {
-      segment: "profile",
-      title: "Profile",
-      icon: <AccountCircleIcon />,
-    },
-  ];
+import { NAVIGATION } from "./features/Navigation/Navigation";
+import { lightTheme, darkTheme } from "./features/Theme/themes";
+function App() {
+  const posts: HomePageProps["initialPosts"] = postsData;
+  const router = useDemoRouter("/posts");
 
   const pages: Record<string, React.ReactElement> = {
     "/posts": <HomePage initialPosts={posts} />,
-    "/users": (
-      <UserPage
-        users={[
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-          { userName: "kerem", biography: "hello", numberOfPosts: 2, liked: 3 },
-        ]}
-      />
-    ),
-    // "/users": <div>sdf</div>,
+    "/users": <UserPage initialUsers={usersData} />,
+    "/profile": <div>Profile Page</div>,
   };
 
   return (
@@ -65,14 +28,9 @@ function App() {
         router={router}
         branding={{
           title: "KeremNet",
-          logo: (
-            <img
-              src={logo}
-              alt="logo image"
-              style={{ width: "2.5em", height: "3em", margin: "0.5vh" }}
-            />
-          ),
+          logo: <img src={logo} alt="logo" className="app-logo" />,
         }}
+        theme={{ dark: darkTheme, light: lightTheme }}
       >
         <DashboardLayout>
           {pages[router.pathname as keyof typeof pages] ?? <div>404</div>}

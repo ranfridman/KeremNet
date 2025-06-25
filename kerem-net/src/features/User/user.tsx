@@ -1,3 +1,8 @@
+import "./user.css";
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import {
   Avatar,
   Card,
@@ -5,23 +10,34 @@ import {
   ListItemText,
   ListItem,
   Stack,
-  ButtonGroup,
-  Button,
+  List,
+  Paper,
+  Typography,
+  Chip,
 } from "@mui/material";
 
 export interface UserProps {
   userName: string;
   biography: string;
+  followers: number;
+  following: number;
   numberOfPosts: number;
   liked: number;
 }
 
-const User: React.FC<UserProps> = ({ userName, biography, numberOfPosts, liked }) => {
+const User: React.FC<UserProps> = ({
+  userName,
+  biography,
+  numberOfPosts,
+  liked,
+  followers,
+  following,
+}) => {
   return (
-    <Card>
+    <Card className="user scale" variant="elevation">
       <Stack direction={"row"} sx={{ pl: 1 }}>
         <ListItem>
-          <Avatar alt={userName} src="/static/images/avatar/1.jpg"></Avatar>
+          <Avatar alt={userName}></Avatar>
         </ListItem>
         <ListItem>
           <ListItemText primary={userName} secondary={biography} />
@@ -29,10 +45,12 @@ const User: React.FC<UserProps> = ({ userName, biography, numberOfPosts, liked }
       </Stack>
       <Divider />
       <Card>
-        <ButtonGroup variant="text" aria-label="Basic button group">
-          <Button >{`${numberOfPosts} Posts`}</Button>
-          <Button>{`${liked} Likes`}</Button>
-        </ButtonGroup>
+        <Paper className="user-info " component={Stack} direction="row"  alignItems={"space-between"} >
+            <Chip variant="outlined" size="small" icon={<PushPinOutlinedIcon />} color="primary" label={`${followers} Follwers`} />
+            <Chip variant="outlined" size="small" icon={<RemoveRedEyeOutlinedIcon />} color="primary" label={`${following} Following`} />
+            <Chip variant="outlined" size="small" icon={<BookmarkBorderOutlinedIcon />} color="primary" label={`${numberOfPosts} Posts`} />
+            <Chip variant="outlined" size="small" icon={<FavoriteBorderOutlinedIcon />} color="primary" label={`${liked} Likes`} />
+        </Paper>
       </Card>
     </Card>
   );

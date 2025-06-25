@@ -10,10 +10,10 @@ import {
   CardContent,
   Card,
   ListItemIcon,
-  Typography,
-  List,
 } from "@mui/material";
-import CommentSection, {CommentSectionProps} from "../CommentSection/CommentSection";
+import CommentSection, {
+  CommentSectionProps,
+} from "../CommentSection/CommentSection";
 export interface PostProps {
   text: string;
   comments: CommentSectionProps;
@@ -22,14 +22,20 @@ export interface PostProps {
   date: string;
 }
 
-const Post: React.FC<PostProps> = ({creatorName,date,text,comments,likes}) => {
+const Post: React.FC<PostProps> = ({
+  creatorName,
+  date,
+  text,
+  comments,
+  likes,
+}) => {
   const [liked, setLiked] = useState(true);
   return (
     <Card className="post" variant="outlined">
       <>
         <ListItem sx={{ pl: 1 }}>
           <ListItemIcon>
-            <Avatar alt={creatorName} src="/static/images/avatar/1.jpg" />
+            <Avatar alt={creatorName} />
           </ListItemIcon>
           <ListItemText primary={creatorName} />
         </ListItem>
@@ -64,7 +70,6 @@ const Post: React.FC<PostProps> = ({creatorName,date,text,comments,likes}) => {
             <ListItemText primary={date} sx={{ textAlign: "right" }} />
           </Stack>
         </div>
-        {/* <div className="post-date">Date: {date}</div> */}
       </CardContent>
 
       <CommentSection comments={comments.comments} />
