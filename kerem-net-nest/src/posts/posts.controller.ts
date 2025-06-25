@@ -1,6 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Param, Post,Body } from '@nestjs/common';
 import { PostsService, PostInfo } from './posts.service';
+export class CreatePostDto {
+  userId: string;
+  text: string;
+  creatorName: string;
+}
+
+export class LikePostDto {
+  userId: string;
+  postId: string;
+}
 
 @Controller('posts')
 export class PostsController {
@@ -11,19 +21,19 @@ export class PostsController {
         return this.postsService.getAllPosts();
     }
 
-    @Get(':id') // Get Posts/:id
+    @Get(':id')
     getPostById(@Param('id') id: string): PostInfo|string {
         return this.postsService.getPostById(id);
     }
 
-    @Post()//Post /Post
-    createPost(@Body() Post: { userId: string, text: string, creatorName: string }): PostInfo {
+    @Post()
+    createPost(@Body() Post: CreatePostDto): PostInfo {
         return this.postsService.createPost(Post);
     }
 
-    @Post("/like/")//Post /user
-    toggleFollow(@Body() body: {userId: string ,postId: string}): any {
-        return this.postsService.toggleLike(body.userId,body.postId);
+    @Post("/like/")
+    toggleLike(@Body() {postId, userId}: LikePostDto): any {
+        return this.postsService.toggleLike(userId,postId);
     }
 
 }

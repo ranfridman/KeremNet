@@ -6,6 +6,11 @@ export class CreateUserDto {
   username: string;
   biography: string;
 }
+
+export class FollowUserDto {
+  followerId: string;
+  userId: string;
+}
 @Controller('users')
 export class UsersController {
 
@@ -22,11 +27,11 @@ export class UsersController {
     }
 
     @Post("/follow")//Post /user
-    toggleFollow( @Body() body:{followerId: string, userId: string}): any {
-        return this.usersService.toggleFollow(body.userId, body.followerId);
+    toggleFollow( @Body() {followerId, userId}:FollowUserDto): any {
+        return this.usersService.toggleFollow(userId, followerId);
     }
     @Post()//Post /user
-    createUser(@Body() user: CreateUserDto): User  {
+    createUser(@Body() user: CreateUserDto,@Req() req:Request): User  {
         return this.usersService.createUser(user);
     }
 

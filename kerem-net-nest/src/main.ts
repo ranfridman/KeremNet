@@ -6,11 +6,11 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { rawBody: true });
-
-  // const app = await NestFactory.create(AppModule);
+  app.set('trust proxy', true); 
+  app.enableCors();
   app.use(express.json());
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3002);
 }
 bootstrap().catch((err) => {
   console.error('Error during bootstrap:', err);

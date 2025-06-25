@@ -2,7 +2,8 @@
 /* eslint-disable prettier/prettier */
 import { v4 } from "uuid";
 import { Injectable } from '@nestjs/common';
-
+import usersDate from '../Data/users.json'
+import { CreateUserDto } from "./users.controller";
 export interface User {
     id: string,
     username: string,
@@ -13,12 +14,10 @@ export interface User {
 }
 
 
+
 @Injectable()
 export class UsersService {
-    private users: User[] = [{
-        id: '1', biography: 'hello', followers: [], following: [], liked: [], username: 'kerem'
-    }
-    ]
+    private users: User[] = usersDate as User[];
 
     getAllUsers(): User[] {
         return this.users;
@@ -28,16 +27,15 @@ export class UsersService {
         return this.users.find(user => user.id === id);
     }
 
-    createUser(user: { username: string, biography: string }): User {
+    createUser({biography, username}: CreateUserDto): User {
         const newUser = {
             id: (v4() as string),
             followers: [],
             following: [],
             liked: [],
-            username: user.username,
-            biography: user.biography
+            username: username,
+            biography: biography
         } as User;
-        console.log(newUser);
         
         this.users.push(newUser);
         return newUser;
@@ -61,20 +59,6 @@ export class UsersService {
         }
 
         return { user, follower };
-    }
-
-    toggleLike(userId: string, postId: string) {
-        const user = this.getUserById(userId);
-        if (!user) {
-            return null
-        } else {
-            if (user.liked.includes(postId)) {
-                user.liked = user.liked.filter(id => id !== postId);
-            } else {
-                user.liked.push(postId);
-            }
-            return user
-        }
     }
 
     updateUser(id: string, items: any) {
