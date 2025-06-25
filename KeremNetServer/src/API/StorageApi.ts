@@ -103,7 +103,7 @@ app.post("/post/create/", (req, res) => {
 //toggle like a post
 app.post("/post/:postId/like/", (req: any, res: any) => {
   const post = storage.where("posts", { id: req.params.postId });
-  const user = storage.where("user", { id: req.query.userId });
+  const user = storage.where("users", { id: req.query.userId });
   if (post.length === 0) {
     return res.status(404).json({ message: "Post was not found" });
   }
@@ -119,6 +119,28 @@ app.post("/post/:postId/like/", (req: any, res: any) => {
     return res.status(200).json(post[0]);
   }
 });
+
+
+
+//toggle follow user
+app.post("/user/:userId/follow/", (req: any, res: any) => {
+  const following = storage.where("users", { id: req.query.userId });
+  const follower = storage.where("users", { id: req.params.followerId });
+  if (following.length === 0 || follower.length === 0) {
+    return res.status(404).json({ message: "User was not found" });
+  }
+  else {
+    if (following[0].followers.includes(follower[0].id)) {
+      following[0].followers.remove(follower[0].id);
+      follower[0].following.remove(following[0].id);
+    } else {
+      following[0].followers.add(follower[0].id);
+      follower[0].following.add(following[0].id);
+    }
+    return res.status(200).json(follower[0]);
+  }
+});
+
 
 //Delete post
 app.delete("/post/:postId/", (req: any, res: any) => {
