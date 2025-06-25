@@ -32,7 +32,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
             <ListItemText primary={`${comments.length} Comments`} />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse in={open}>
             <List
               component="div"
               disablePadding

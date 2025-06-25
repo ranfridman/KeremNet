@@ -16,7 +16,7 @@ const Comment: React.FC<CommentProps> = ({userName,commentContent,date}) => {
     <>
       <ListItemButton sx={{ pl: 4 }}>
         <ListItemIcon>
-            <Avatar alt={userName} src="/static/images/avatar/1.jpg" />
+            <Avatar alt={userName} />
     </ListItemIcon>
         <ListItemText primary={commentContent} secondary={date}/>
       </ListItemButton>
