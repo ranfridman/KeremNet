@@ -7,6 +7,7 @@ import { AppProvider } from "@toolpad/core/AppProvider";
 import Pages from "./features/Pages/Pages";
 import { NAVIGATION } from "./features/Navigation/Navigation";
 import { lightTheme, darkTheme } from "./features/Theme/themes";
+
 function App() {
   const router = useDemoRouter("/posts");
   return (
@@ -23,6 +24,8 @@ function App() {
           {Pages[router.pathname] ?? <div>404</div>}
         </DashboardLayout>
       </AppProvider>
+
+
     </div>
   );
 }

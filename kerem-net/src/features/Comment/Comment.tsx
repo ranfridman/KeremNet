@@ -4,6 +4,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import React from "react";
 
 export interface CommentProps {
   commentContent: string;
@@ -12,11 +13,13 @@ export interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({userName,commentContent,date}) => {
+
   return (
     <>
       <ListItemButton sx={{ pl: 4 }}>
         <ListItemIcon>
             <Avatar alt={userName} />
+
     </ListItemIcon>
         <ListItemText primary={commentContent} secondary={date}/>
       </ListItemButton>

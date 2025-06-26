@@ -2,6 +2,7 @@ import { useState } from "react";
 import Post, {
   PostProps,
 } from "../Post/Post";
+
 import "./HomePage.css";
 import { Box } from "@mui/material";
 export interface HomePageProps {
