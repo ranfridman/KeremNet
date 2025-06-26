@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable prettier/prettier */
@@ -5,25 +6,13 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { v4 } from "uuid";
-import { User, UsersService } from '../users/users.service';
+import { UsersService } from '../users/users.service';
 import postsDate from '../Data/posts.json'
-import { CreatePostDto } from './posts.controller';
+import { CreatePostDto } from '../Interfaces/CreatePostDto';
 import { NotFoundException } from '@nestjs/common';
+import { PostInfo } from 'src/Interfaces/PostInfo';
 
 
-export interface PostInfo {
-    id: string,
-    userId: string,
-    text: string;
-    comments: {
-        commentContent: string;
-        userName: string;
-        date: string;
-    }[],
-    likes: string[];
-    creatorName: string;
-    date: string;
-}
 @Injectable()
 export class PostsService {
     constructor(private usersService: UsersService) { }
