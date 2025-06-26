@@ -12,11 +12,12 @@ import {
   Box,
 } from "@mui/material";
 import React from "react";
+import useStepper from "../../Hooks/useStepper/useStepper";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import api from "../../Scripts/API/Api";
 import {ApiPost} from "../../Scripts/API/Api";
 const CreatePostPage = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeStep, setActiveStep] = React.useState(0);
   const [postContent, setPostContent] = React.useState("");
   const notifications = useNotifications();
 
@@ -25,18 +26,9 @@ const CreatePostPage = () => {
     text: postContent,
     creatorName: localStorage.getItem("username"),
   };
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  const { activeStep, nextStep, previousStep,resetStep } = useStepper();     
   const handleSubmit = () => {
-    handleNext();
+    nextStep();
     setPostContent(""); 
     ApiPost(
       "/posts/",
@@ -96,7 +88,7 @@ const CreatePostPage = () => {
                   <Button
                     variant="contained"
                     onClick={
-                      index === steps.length - 1 ? handleSubmit : handleNext
+                      index === steps.length - 1 ? handleSubmit : nextStep
                     }
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -104,7 +96,7 @@ const CreatePostPage = () => {
                   </Button>
                   <Button
                     disabled={index === 0}
-                    onClick={handleBack}
+                    onClick={previousStep}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
@@ -123,7 +115,7 @@ const CreatePostPage = () => {
             >
               Post was created
             </Typography>
-            <Button variant="contained" onClick={handleReset}>New Post</Button>
+            <Button variant="contained" onClick={resetStep}>New Post</Button>
           </Box>
         )}
       </Card>

@@ -8,31 +8,27 @@ import {
   CircularProgress,
 } from "@mui/material";
 import "./UserPage.css";
-import api from "../../Scripts/API/Api";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import useFetch from "../../Hooks/useFetch/useFetch";
 
-export interface UserPageProps {
-  initialUsers: UserProps[];
-}
 
 const UserPage: React.FC = () => {
   const [filteredUsers, setFilteredUsers] = useState([] as UserProps[]);
   const notifications = useNotifications();
-  const { data, loading, error } = useFetch("/users");
+  const { data, loading, error } = useFetch<UserProps[]>("/users");
 
   const handleTextChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFilteredUsers(
-      ((data ?? []) as UserProps[]).filter((user) =>
+      ((data ?? [])).filter((user) =>
         user.username.toLowerCase().includes(e.target.value.toLowerCase())
       )
     );
   };
 
   useEffect(() => {
-    setFilteredUsers((data ?? []) as UserProps[]);
+    setFilteredUsers((data ?? []));
   }, [data]);
 
   return (

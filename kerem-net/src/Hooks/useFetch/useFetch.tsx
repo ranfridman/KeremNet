@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import api from "../../Scripts/API/Api";
-const useFetch = (address: string) => {
-  const [data, setData] = useState(null);
+const useFetch = <T,>(address: string) => {
+  const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getData = async () => {

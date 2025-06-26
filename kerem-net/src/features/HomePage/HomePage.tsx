@@ -6,7 +6,7 @@ import useFetch from "../../Hooks/useFetch/useFetch";
 
 const HomePage: React.FC = () => {
   const notifications = useNotifications();
-  const { data, loading, error } = useFetch("/posts");
+  const { data, loading, error } = useFetch<PostProps[]>("/posts");
   return (
     <Box>
       {
@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
       <div className="home-page">
         {loading && <CircularProgress />}
         <div className="posts-container">
-          {((data ?? []) as PostProps[]).map((post, index) => (
+          {((data ?? [])).map((post, index) => (
             <Post key={index} {...post} />
           ))}
         </div>
