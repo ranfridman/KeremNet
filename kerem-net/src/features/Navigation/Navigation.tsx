@@ -5,7 +5,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
 export const NAVIGATION: Navigation = [
   {

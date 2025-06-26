@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import User, { UserProps } from "../User/user";
 import {
   Grid,
@@ -10,46 +10,30 @@ import {
 import "./UserPage.css";
 import api from "../../Scripts/API/Api";
 import { useNotifications } from "@toolpad/core/useNotifications";
+import useFetch from "../../Hooks/useFetch/useFetch";
 
 export interface UserPageProps {
   initialUsers: UserProps[];
 }
 
-const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
-  const [allUsers, setAllUsers] = useState(initialUsers);
-  const [filteredUsers, setFilteredUsers] = useState(initialUsers);
-  const [hasLoadedUsers, setHasLoadedUsers] = useState<boolean>(false);
+const UserPage: React.FC = () => {
+  const [filteredUsers, setFilteredUsers] = useState([] as UserProps[]);
   const notifications = useNotifications();
-
-  useEffect(() => {
-    const id = setTimeout(() => {
-      api
-        .get("/users")
-        .then((res: any) => {
-          console.log(res.data);
-          setHasLoadedUsers(true);
-          setFilteredUsers(res.data);
-          setAllUsers(res.data);
-        })
-        .catch((error) => {
-          notifications.show(error.message, { severity: "error" });
-        });
-    }, 1000);
-
-    return () => {
-      clearTimeout(id);
-    };
-  }, []);
+  const { data, loading, error } = useFetch("/users");
 
   const handleTextChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFilteredUsers(
-      allUsers.filter((user) =>
+      ((data ?? []) as UserProps[]).filter((user) =>
         user.username.toLowerCase().includes(e.target.value.toLowerCase())
       )
     );
   };
+
+  useEffect(() => {
+    setFilteredUsers((data ?? []) as UserProps[]);
+  }, [data]);
 
   return (
     <Container className="users-page">
@@ -57,9 +41,7 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
         <TextField
           label="Enter username"
           variant="outlined"
-          onChange={(e) => {
-            handleTextChange(e);
-          }}
+          onChange={handleTextChange}
         />
       </Card>
 
@@ -70,11 +52,16 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
         flexWrap="wrap"
         sx={{ padding: 2, gap: 2 }}
       >
-        {!hasLoadedUsers && <CircularProgress />}
+        {loading && <CircularProgress /> }
         {filteredUsers.map((user, index) => (
           <User key={index} {...user} />
         ))}
       </Grid>
+      {error &&
+        notifications.show(error, {
+          severity: "error",
+          autoHideDuration: 1000,
+        })}
     </Container>
   );
 };

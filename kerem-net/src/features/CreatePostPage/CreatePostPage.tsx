@@ -21,9 +21,9 @@ const CreatePostPage = () => {
   const notifications = useNotifications();
 
   const createPostData = {
-    userId: sessionStorage.getItem("userId"),
+    userId: localStorage.getItem("userId"),
     text: postContent,
-    creatorName: sessionStorage.getItem("username"),
+    creatorName: localStorage.getItem("username"),
   };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
