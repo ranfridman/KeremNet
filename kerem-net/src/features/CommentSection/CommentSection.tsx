@@ -16,6 +16,7 @@ export interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {

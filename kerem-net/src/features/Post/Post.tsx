@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Post.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import { PostContent } from "../PostContent/PostContent";
 
 import {
@@ -13,12 +14,12 @@ import {
   Card,
   ListItemIcon,
 } from "@mui/material";
-import CommentSection, {
-  CommentSectionProps,
-} from "../CommentSection/CommentSection";
+import { CommentProps } from "../Comment/Comment";
+import CommentSection from "../CommentSection/CommentSection";
 export interface PostProps {
   text: string;
-  comments: CommentSectionProps;
+  comments: CommentProps[];
+
   likes: number;
   creatorName: string;
   date: string;
@@ -42,6 +43,7 @@ const Post: React.FC<PostProps> = ({
           <ListItemText primary={creatorName} />
         </ListItem>
       </>
+
       <PostContent text={text} />
       <CardContent>
         <div>
@@ -72,7 +74,8 @@ const Post: React.FC<PostProps> = ({
         </div>
       </CardContent>
 
-      <CommentSection comments={comments.comments} />
+      <CommentSection comments={comments} />
+
     </Card>
   );
 };

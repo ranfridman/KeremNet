@@ -1,0 +1,17 @@
+[
+    {
+        "id": "sad",
+        "userId": "dfgsdfg",
+        "text": "sdfgsdfgsdfg",
+        "comments": [
+            {
+                "commentContent": "dsfgsdfg",
+                "userName": "sfdgsdfg",
+                "date": "sdfgsfg"
+            }
+        ],
+        "likes": [],
+        "creatorName": "sdfgsdfg",
+        "date": "sdfgsdf"
+    }
+]
