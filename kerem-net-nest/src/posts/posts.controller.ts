@@ -1,16 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Param, Post,Body } from '@nestjs/common';
-import { PostsService, PostInfo } from './posts.service';
-export class CreatePostDto {
-  userId: string;
-  text: string;
-  creatorName: string;
-}
+import { PostsService } from './posts.service';
+import { PostInfo } from 'src/Interfaces/PostInfo';
+import { CreatePostDto } from 'src/Interfaces/CreatePostDto';
+import { LikePostDto } from 'src/Interfaces/LikePostDto';
 
-export class LikePostDto {
-  userId: string;
-  postId: string;
-}
+
+
 
 @Controller('posts')
 export class PostsController {

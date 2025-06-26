@@ -1,16 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { UsersService, User } from './users.service';
+import { CreateUserDto } from 'src/Interfaces/CreateUserDto';
+import { FollowUserDto } from 'src/Interfaces/FollowUserDto';
 
-export class CreateUserDto {
-  username: string;
-  biography: string;
-}
 
-export class FollowUserDto {
-  followerId: string;
-  userId: string;
-}
 @Controller('users')
 export class UsersController {
 

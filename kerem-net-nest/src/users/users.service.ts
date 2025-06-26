@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import { NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import usersData from '../Data/users.json'
-import { CreateUserDto } from "./users.controller";
+import { CreateUserDto } from "../Interfaces/CreateUserDto";
 export interface User {
     id: string,
     username: string,
