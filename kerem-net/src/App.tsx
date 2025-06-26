@@ -1,13 +1,28 @@
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
-import HomePage from "./features/HomePage/HomePage";
-import Data from "./Data/posts.json";
+import { useDemoRouter } from "@toolpad/core/internal";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { AppProvider } from "@toolpad/core/AppProvider";
+import Pages from "./features/Pages/Pages";
+import { NAVIGATION } from "./features/Navigation/Navigation";
+import { lightTheme, darkTheme } from "./features/Theme/themes";
 function App() {
-  const posts = Data;
+  const router = useDemoRouter("/posts");
   return (
     <div className="App">
-      <HomePage initialPosts={posts}/>
+      <AppProvider
+        navigation={NAVIGATION}
+        router={router}
+        branding={{
+          title: "KeremNet",
+          logo: <img src={logo} alt="logo" className="app-logo" />,
+        }}
+        theme={{ dark: darkTheme, light: lightTheme }}>
+        <DashboardLayout>
+          {Pages[router.pathname] ?? <div>404</div>}
+        </DashboardLayout>
+      </AppProvider>
     </div>
   );
 }

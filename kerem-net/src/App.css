@@ -1,6 +1,7 @@
 .App {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -26,4 +27,9 @@
   color: white;
 }
 
+.app-logo {
+  width: 2.5em;
+  height: 3em;
+  margin: 0.5vh;
 
+}

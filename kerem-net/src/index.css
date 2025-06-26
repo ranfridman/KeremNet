@@ -20,6 +20,7 @@ code {
   --primary: #22817E;
   --secondary: #a6dcda;
   --likeColor: #db2b2b;
+  --likeBackgroundColor : #db2b2b53;
   --primaryBackground: #22817e47;
   --secondaryBackground: #a6dcda;
 }
