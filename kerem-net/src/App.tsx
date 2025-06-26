@@ -7,25 +7,29 @@ import { AppProvider } from "@toolpad/core/AppProvider";
 import Pages from "./features/Pages/Pages";
 import { NAVIGATION } from "./features/Navigation/Navigation";
 import { lightTheme, darkTheme } from "./features/Theme/themes";
+import { Account } from "@toolpad/core";
 
 function App() {
   const router = useDemoRouter("/posts");
   return (
     <div className="App">
       <AppProvider
+        authentication={{
+          signIn() {},
+          signOut() {},
+        }}
         navigation={NAVIGATION}
         router={router}
         branding={{
           title: "KeremNet",
           logo: <img src={logo} alt="logo" className="app-logo" />,
         }}
-        theme={{ dark: darkTheme, light: lightTheme }}>
+        theme={{ dark: darkTheme, light: lightTheme }}
+      >
         <DashboardLayout>
           {Pages[router.pathname] ?? <div>404</div>}
         </DashboardLayout>
       </AppProvider>
-
-
     </div>
   );
 }

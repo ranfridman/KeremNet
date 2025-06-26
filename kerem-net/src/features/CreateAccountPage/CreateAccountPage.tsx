@@ -14,36 +14,31 @@ import {
 import React from "react";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import api from "../../Scripts/API/Api";
-const CreateAccountPage = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
+import useStepper from "../../Hooks/useStepper/useStepper";
+const CreateAccountPage:React.FC = () => {
   const [username, setUsername] = React.useState("");
   const [biography, setBiography] = React.useState("");
   const notifications = useNotifications();
+  
+  const { activeStep, nextStep, previousStep,resetStep } = useStepper();  
 
   const createUserData = {
     username,
     biography,
   };
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const validateUsername = username.length > 0 && /^[a-zA-Z0-9]+$/.test(username);
   const validateBiography = biography.length > 0 && /^[a-zA-Z0-9]+$/.test(biography);
-  const validateUserDetails = true;
+  const validateUserDetails = validateUsername && validateBiography;
 
   const handleSubmit = () => {
-    handleNext();
+    nextStep();
     api.post("/users/", createUserData).then((response) => {
       
       notifications.show(`Account was created`, { severity: "success",autoHideDuration: 3000 });
-      sessionStorage.setItem("username", response.data.username);
-      sessionStorage.setItem("isLoggedIn", "true");
-      sessionStorage.setItem("userId", response.data.id);
+      localStorage.setItem("username", response.data.username);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userId", response.data.id);
     }).catch((error) => {
       notifications.show(error.message, { severity: "error" });
 
@@ -103,7 +98,7 @@ const CreateAccountPage = () => {
                     variant="contained"
                     disabled={!step.validateFunction}
                     onClick={
-                      index === steps.length - 1 ? handleSubmit : handleNext
+                      index === steps.length - 1 ? handleSubmit : nextStep
                     }
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -111,7 +106,7 @@ const CreateAccountPage = () => {
                   </Button>
                   <Button
                     disabled={index === 0}
-                    onClick={handleBack}
+                    onClick={previousStep}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
