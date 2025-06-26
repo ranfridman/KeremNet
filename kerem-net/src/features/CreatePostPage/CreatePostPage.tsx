@@ -12,16 +12,18 @@ import {
   Box,
 } from "@mui/material";
 import React from "react";
+import { useNotifications } from "@toolpad/core/useNotifications";
 import api from "../../Scripts/API/Api";
+import {ApiPost} from "../../Scripts/API/Api";
 const CreatePostPage = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [username, setUsername] = React.useState("");
-  const [biography, setBiography] = React.useState("");
   const [postContent, setPostContent] = React.useState("");
+  const notifications = useNotifications();
 
-  const createUserData = {
-    username,
-    biography,
+  const createPostData = {
+    userId: sessionStorage.getItem("userId"),
+    text: postContent,
+    creatorName: sessionStorage.getItem("username"),
   };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -30,29 +32,32 @@ const CreatePostPage = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
+  const handleReset = () => {
+    setActiveStep(0);
+  };
   const handleSubmit = () => {
     handleNext();
-    api.post("/users/", createUserData).then((response) => {
-      console.log(response);
-    });
+    setPostContent(""); 
+    ApiPost(
+      "/posts/",
+      createPostData,
+      () => {
+        notifications.show(`Post was created`, {
+          severity: "success",
+          autoHideDuration: 3000,
+        });
+      },
+      (error: any) => {
+        notifications.show(error.message, { severity: "error" });
+      }
+    );
   };
 
   const steps = [
     {
-      title: "Enter Username",
-      description:
-        "Make sure your username is unique and doesn't contain any special characters",
-      updateFunction: setUsername,
-    },
-    {
-      title: "Enter Biography",
-      description: "Enter your Biography",
-      updateFunction: setBiography,
-    },
-    {
       title: "Enter Post Content",
-      description: "Enter your username",
+      description:
+        "Write down your post and tell the world what you want to say",
       updateFunction: setPostContent,
     },
     {
@@ -109,12 +114,18 @@ const CreatePostPage = () => {
             </Step>
           ))}
         </Stepper>
-              {activeStep === steps.length  && (
-                <Typography variant="h5" color="primary" className="create-post-success" >
-                  Post was created
-                </Typography>
-              ) }
-
+        {activeStep === steps.length && (
+          <Box>
+            <Typography
+              variant="h5"
+              color="primary"
+              className="create-post-success"
+            >
+              Post was created
+            </Typography>
+            <Button variant="contained" onClick={handleReset}>New Post</Button>
+          </Box>
+        )}
       </Card>
     </Container>
   );

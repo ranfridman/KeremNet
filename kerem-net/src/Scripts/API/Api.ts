@@ -7,4 +7,16 @@ const api = axios.create({
     timeout: 1000,
 });
 
+export const ApiPost = (address:string, data:any, handlerSuccess: (response: any) => void, handlerError:(error: any) => void) => {
+    api
+        .post(address, data)
+        .then((response) => {
+            handlerSuccess(response);
+        })
+        .catch((error) => {
+            handlerError(error);
+        });
+};
+
+
 export default api;     

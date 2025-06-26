@@ -3,8 +3,10 @@ import type { Navigation } from "@toolpad/core/AppProvider";
 import GroupIcon from "@mui/icons-material/Group";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+
 export const NAVIGATION: Navigation = [
   {
     kind: "header",
@@ -20,18 +22,31 @@ export const NAVIGATION: Navigation = [
     title: "Users",
     icon: <GroupIcon />,
   },
-    {
-    segment: "createPost",
-    title: "Create Post",
-    icon: <EditNoteIcon />,
-  },
+
   {
-    kind: "divider",
-    
+    kind: "divider" as const,
   },
-  {
-    segment: "profile",
-    title: "Profile",
-    icon: <AccountCircleIcon />,
-  },
+  ...(isLoggedIn
+    ? [
+        {
+          segment: "createPost",
+          title: "Create Post",
+          icon: <EditNoteIcon />,
+        },
+        {
+          segment: "profile",
+          title: "Profile",
+          icon: <AccountCircleIcon />,
+        },
+      ]
+    : []),
+      ...(!isLoggedIn
+    ? [
+        {
+          segment: "createAccount",
+          title: "Create Account",
+          icon: <ExitToAppIcon />,
+        },
+      ]
+    : []),
 ];
