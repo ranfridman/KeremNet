@@ -1,0 +1,27 @@
+.create-post-form {
+    width: 35em;
+    padding: 2vw;
+    padding-left: 4vw;
+
+}
+
+.create-post-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+}
+
+.create-post-title {
+    margin-top: 1em;
+}
+
+.create-post-input {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
+
+.create-post-success{
+    margin: 0.4em !important;
+    margin-left: 0 !important;
+}

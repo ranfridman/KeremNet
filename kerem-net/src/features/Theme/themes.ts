@@ -3,7 +3,7 @@ export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-            default: '#1c1c1c',
+            default: '#121212',
         }
     },
 });
