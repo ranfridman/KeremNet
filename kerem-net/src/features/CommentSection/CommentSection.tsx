@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Comment, { CommentProps } from "../Comment/Comment";
+
 import {
   Collapse,
   ListItemButton,
@@ -16,6 +17,7 @@ export interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -50,3 +52,4 @@ const CommentSection: React.FC<CommentSectionProps> = ({comments}) => {
 };
 
 export default CommentSection;
+
