@@ -1,46 +1,46 @@
 [
     {
         "text": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quos.",
-        "comments": {
-            "comments": [
-                {
-                    "commentContent": "test1",
-                    "userName": "SDF", "date": "tessdfsdfst"
-                },
-                {
-                    "commentContent": "test1",
-                    "userName": "test", "date": "test"
-                },
-                {
-                    "commentContent": "test1",
-                    "userName": "ASGD", "date": "test"
-                },
-                {
-                    "commentContent": "test1",
-                    "userName": "Rtest", "date": "test"
-                }
-            ]
-        },
+        "comments": [
+            {
+                "commentContent": "test1",
+                "userName": "SDF",
+                "date": "tessdfsdfst"
+            },
+            {
+                "commentContent": "test1",
+                "userName": "test",
+                "date": "test"
+            },
+            {
+                "commentContent": "test1",
+                "userName": "ASGD",
+                "date": "test"
+            },
+            {
+                "commentContent": "test1",
+                "userName": "Rtest",
+                "date": "test"
+            }
+        ],
         "likes": 1323,
         "creatorName": "Ran",
         "date": "3/3/3"
     },
     {
         "text": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quos.",
-        "comments": {
-            "comments": [
-                {
-                    "commentContent": "test1",
-                    "userName": "SDF",
-                    "date": "3/3/3"
-                },
-                {
-                    "commentContent": "test1",
-                    "userName": "Rtest",
-                    "date": "3/3/3"
-                }
-            ]
-        },
+        "comments": [
+            {
+                "commentContent": "test1",
+                "userName": "SDF",
+                "date": "3/3/3"
+            },
+            {
+                "commentContent": "test1",
+                "userName": "Rtest",
+                "date": "3/3/3"
+            }
+        ],
         "likes": 1323,
         "creatorName": "test",
         "date": "test"

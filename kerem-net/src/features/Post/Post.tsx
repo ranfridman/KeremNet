@@ -11,12 +11,11 @@ import {
   Card,
   ListItemIcon,
 } from "@mui/material";
-import CommentSection, {
-  CommentSectionProps,
-} from "../CommentSection/CommentSection";
+import { CommentProps } from "../Comment/Comment";
+import CommentSection from "../CommentSection/CommentSection";
 export interface PostProps {
   text: string;
-  comments: CommentSectionProps;
+  comments: CommentProps[];
   likes: number;
   creatorName: string;
   date: string;
@@ -72,7 +71,7 @@ const Post: React.FC<PostProps> = ({
         </div>
       </CardContent>
 
-      <CommentSection comments={comments.comments} />
+      <CommentSection comments={comments} />
     </Card>
   );
 };

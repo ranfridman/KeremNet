@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Param, Post, Body,Req } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { UsersService, User } from './users.service';
 
 export class CreateUserDto {
@@ -31,7 +31,7 @@ export class UsersController {
         return this.usersService.toggleFollow(userId, followerId);
     }
     @Post()//Post /user
-    createUser(@Body() user: CreateUserDto,@Req() req:Request): User  {
+    createUser(@Body() user: CreateUserDto): User  {
         return this.usersService.createUser(user);
     }
 
