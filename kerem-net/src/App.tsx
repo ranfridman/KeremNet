@@ -1,37 +1,31 @@
 import React from "react";
+import logo from "./logo.png";
 import "./App.css";
-<<<<<<< HEAD
-import HomePage from "./features/HomePage/HomePage";
-import Data from "./Data/posts.json";
+import { useDemoRouter } from "@toolpad/core/internal";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { AppProvider } from "@toolpad/core/AppProvider";
+import Pages from "./features/Pages/Pages";
+import { NAVIGATION } from "./features/Navigation/Navigation";
+import { lightTheme, darkTheme } from "./features/Theme/themes";
+
 function App() {
-  const posts = Data;
+  const router = useDemoRouter("/posts");
   return (
     <div className="App">
-      <HomePage initialPosts={posts}/>
-=======
-import Post, {
-  PostProps,
-} from "./features/Post/Post";
-function App() {
-  const posts: PostProps = {
-    text: "text",
-    comments: {
-      comments: [
-        { commentContent: "comment1", userName: "userName", date: "date" },
-        { commentContent: "comment2", userName: "userName", date: "date" },
-        { commentContent: "comment2", userName: "userName", date: "date" },
-        { commentContent: "comment2", userName: "userName", date: "date" },
-        { commentContent: "comment2", userName: "userName", date: "date" },
-      ],
-    },
-    likes: 10,
-    creatorName: "creatorName",
-    date: "date",
-  };
-  return (
-    <div className="App">
-      <Post {...posts} />
->>>>>>> post-component
+      <AppProvider
+        navigation={NAVIGATION}
+        router={router}
+        branding={{
+          title: "KeremNet",
+          logo: <img src={logo} alt="logo" className="app-logo" />,
+        }}
+        theme={{ dark: darkTheme, light: lightTheme }}>
+        <DashboardLayout>
+          {Pages[router.pathname] ?? <div>404</div>}
+        </DashboardLayout>
+      </AppProvider>
+
+
     </div>
   );
 }

@@ -1,0 +1,28 @@
+.users-page{
+    display: flex;
+    flex-direction: column;
+    padding-top: 1em;
+    align-items: center;
+    justify-items: center;
+    width: 100%
+}
+
+.users-grid{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.users-page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.scale:hover{
+    transform: scale(1.01);      
+    transition: transform 0.1s ease-in-out; 
+}
+
+.filter-section{
+     padding: 1em;
+     
+}

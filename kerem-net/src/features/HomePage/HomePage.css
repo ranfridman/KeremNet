@@ -1,6 +1,5 @@
 .home-page{
     margin-top: 1vw;
-    border: 0.5vw dotted var(--primary);
     padding: 1vw;
 }
 .posts-container {
