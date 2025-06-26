@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Post, { PostProps } from "../Post/Post";
+
 import "./HomePage.css";
 import { Box, CircularProgress } from "@mui/material";
 import api from "../../Scripts/API/Api";

@@ -2,6 +2,9 @@ import { useState } from "react";
 import "./Post.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
+import { PostContent } from "../PostContent/PostContent";
+
 import {
   ListItemText,
   Avatar,
@@ -11,14 +14,13 @@ import {
   Card,
   ListItemIcon,
 } from "@mui/material";
-import Comment, {
-  CommentProps,
-} from "../Comment/Comment";
+import { CommentProps } from "../Comment/Comment";
 import CommentSection from "../CommentSection/CommentSection";
 export interface PostProps {
   text: string;
   comments: CommentProps[];
   likes: string[];
+
   creatorName: string;
   date: string;
 }
@@ -41,9 +43,9 @@ const Post: React.FC<PostProps> = ({
           <ListItemText primary={creatorName} />
         </ListItem>
       </>
-      <div className="post-content">
-        <ListItemText className="post-text" primary={text} />
-      </div>
+
+
+      <PostContent text={text} />
       <CardContent>
         <div>
           <Stack
@@ -74,6 +76,7 @@ const Post: React.FC<PostProps> = ({
       </CardContent>
 
       <CommentSection comments={comments} />
+
     </Card>
   );
 };
