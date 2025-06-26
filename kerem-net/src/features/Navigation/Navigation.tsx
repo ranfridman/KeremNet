@@ -1,4 +1,5 @@
-import { type Navigation } from "@toolpad/core/AppProvider";
+import React from "react";
+import type { Navigation } from "@toolpad/core/AppProvider";
 import GroupIcon from "@mui/icons-material/Group";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
