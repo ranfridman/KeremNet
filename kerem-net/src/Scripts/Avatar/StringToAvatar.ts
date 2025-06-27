@@ -26,6 +26,7 @@ export function stringAvatar(name: string | undefined) {
             },
         };
     }
+    name = name.toUpperCase();
     const nameParts = name.split(' ');
     let children = nameParts[0][0];
     if (nameParts.length > 1 && nameParts[1].length > 0) {

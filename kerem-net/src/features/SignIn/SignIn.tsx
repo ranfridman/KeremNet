@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Hooks/useAccount/store";
-import { logIn, setAccountInfo } from "../../Hooks/useAccount/createSlice";
+import { logIn, AuthUser, setUserInfo } from "../../Hooks/useAccount/createSlice";
 
 interface SignInProps {
   isSignInOpen: boolean;
@@ -31,19 +31,20 @@ const SignIn: React.FC<SignInProps> = ({ isSignInOpen, setOpenSignIn }) => {
       .unwrap()
       .then((response) => {
         dispatch(
-          setAccountInfo({
+          AuthUser({
             username: response.data.username,
             password: response.data.password,
             id: response.data.id    
           })
         );
+        dispatch(setUserInfo(response.data));
         setOpenSignIn(false);   
       })
       .catch((error) => {
         console.log(error); 
       });
   };
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();  
   return (
     <Dialog open={isSignInOpen} onClose={handleClose}>
       <DialogTitle>

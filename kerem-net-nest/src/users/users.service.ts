@@ -15,8 +15,6 @@ export interface User {
     password: string
 }
 
-
-
 @Injectable()
 export class UsersService {
     private users: User[] = usersData as User[];
@@ -53,16 +51,19 @@ export class UsersService {
     }
 
     toggleFollow(userId: string, followerId: string) {
-        const user = this.getUserById(userId);
-        const follower = this.getUserById(followerId);
+        const user = this.users.find(u => u.id === userId);
+        const follower = this.users.find(u => u.id === followerId);
         if (!user || !follower) {
             throw new NotFoundException('Resource not found');
         }
         if (user.followers.includes(followerId)) {
             user.followers = user.followers.filter(id => id !== followerId);
-            follower.following = follower.following.filter(id => id !== userId);
         } else {
             user.followers.push(followerId);
+        }
+        if (follower.following.includes(userId)) {
+            follower.following = follower.following.filter(id => id !== userId);
+        } else {
             follower.following.push(userId);
         }
         return follower;

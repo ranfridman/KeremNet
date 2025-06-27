@@ -12,6 +12,8 @@ export const lightTheme = createTheme({
         mode: 'light',
         background: {
             default: 'aliceblue',
+            // paper: "#e9f6ff"
+
         }
     },
 });

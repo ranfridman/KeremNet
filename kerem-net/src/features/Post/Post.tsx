@@ -17,13 +17,16 @@ import {
 import { CommentProps } from "../Comment/Comment";
 import CommentSection from "../CommentSection/CommentSection";
 import { stringAvatar } from "../../Scripts/Avatar/StringToAvatar";
+import api from "../../Scripts/API/Api";
+import { useSelector } from "react-redux";
+import { RootState } from "../../Hooks/useAccount/store";
 export interface PostProps {
   text: string;
   comments: CommentProps[];
   likes: string[];
-
   creatorName: string;
   date: string;
+  id: string;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -32,19 +35,32 @@ const Post: React.FC<PostProps> = ({
   text,
   comments,
   likes,
+  id,
 }) => {
-  const [liked, setLiked] = useState(true);
+  const userId = useSelector((state: RootState) => state.account.id);
+  const [liked, setLiked] = useState(likes.includes(userId));
+  const [numberOfLikes, setNumberOfLikes] = useState(likes.length);
+
+  const handleLike = (postId: string) => {
+    api
+      .post("/posts/like", { postId: postId, userId: userId })
+      .then((response) => {
+        setLiked(response.data.likes.includes(userId));
+        setNumberOfLikes(response.data.likes.length);
+      })
+      .catch(() => {});
+  };
+
   return (
     <Card className="post" variant="outlined">
       <>
         <ListItem sx={{ pl: 1 }}>
           <ListItemIcon>
-            <Avatar  {...stringAvatar(`${creatorName}`)}/>
+            <Avatar {...stringAvatar(`${creatorName}`)} />
           </ListItemIcon>
           <ListItemText primary={creatorName} />
         </ListItem>
       </>
-
 
       <PostContent text={text} />
       <CardContent>
@@ -57,18 +73,18 @@ const Post: React.FC<PostProps> = ({
             }}
           >
             <ListItemIcon
-              onClick={() => setLiked(!liked)}
+              onClick={() => handleLike(id)}
               sx={{
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
             >
-              {liked ? (
+              {!liked ? (
                 <FavoriteBorderIcon className="post-likes" />
               ) : (
                 <FavoriteIcon className="post-likes" />
               )}
-              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${likes.length}`} />
+              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${numberOfLikes}`} />
             </ListItemIcon>
 
             <ListItemText primary={date} sx={{ textAlign: "right" }} />
@@ -77,7 +93,6 @@ const Post: React.FC<PostProps> = ({
       </CardContent>
 
       <CommentSection comments={comments} />
-
     </Card>
   );
 };

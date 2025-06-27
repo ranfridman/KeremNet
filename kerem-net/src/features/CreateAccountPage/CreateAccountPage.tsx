@@ -15,7 +15,7 @@ import React from "react";
 import { useNotifications } from "@toolpad/core/useNotifications";
 import api from "../../Scripts/API/Api";
 import useStepper from "../../Hooks/useStepper/useStepper";
-import { setAccountInfo } from "../../Hooks/useAccount/createSlice";
+import { AuthUser } from "../../Hooks/useAccount/createSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Hooks/useAccount/store";
 
@@ -56,7 +56,7 @@ const CreateAccountPage: React.FC = () => {
           autoHideDuration: 3000,
         });
         dispatch(
-          setAccountInfo({
+          AuthUser({
             username: username,
             password: password,
             id: response.data.id

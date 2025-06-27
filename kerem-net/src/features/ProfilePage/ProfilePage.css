@@ -1,0 +1,38 @@
+.user-profile-page{
+    padding: 1em;
+
+
+}
+.user-details{
+    padding: 1em;
+    gap: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center
+
+}
+.user-info-header{
+    width: 20px;
+    display: flex;
+    gap: 3em;
+    align-items: center;
+    justify-content: center;                            
+}
+
+.profile-image{
+    height: 40em ;
+}
+.user-info-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 1em;
+
+}
+
+.posts-container{
+    padding: 1em;
+}

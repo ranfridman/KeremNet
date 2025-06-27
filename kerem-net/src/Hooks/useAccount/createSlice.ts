@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ApiPost } from '../../Scripts/API/Api';
-import { Session } from '@toolpad/core';
 
 interface AccountState {
     username: string;
@@ -27,7 +26,17 @@ const AccountSlice = createSlice({
     name: 'Account',
     initialState,
     reducers: {
-        setAccountInfo: (
+        setUserInfo(state, action: PayloadAction<Omit<AccountState, 'isLoggedIn'>>) {
+            state.username = action.payload.username;
+            state.password = action.payload.password;
+            state.id = action.payload.id;
+            state.followers = action.payload.followers;
+            state.following = action.payload.following;
+            state.liked = action.payload.liked;
+            state.biography = action.payload.biography;
+        },
+
+        AuthUser: (
             state,
             action: PayloadAction<{ username: string; password: string; id: string }>
         ) => {
@@ -79,5 +88,5 @@ export const logIn = createAsyncThunk(
     }
 );
 
-export const { setAccountInfo, logOut } = AccountSlice.actions;
+export const { AuthUser, logOut,setUserInfo } = AccountSlice.actions;
 export default AccountSlice.reducer;
