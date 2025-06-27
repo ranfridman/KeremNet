@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Param, Post,Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostInfo } from 'src/Interfaces/PostInfo';
 import { CreatePostDto } from 'src/Interfaces/CreatePostDto';
-import { LikePostDto } from 'src/Interfaces/LikePostDto';
+import { CommentPostDto, LikePostDto } from 'src/Interfaces/LikePostDto';
 
 
 
@@ -18,7 +18,7 @@ export class PostsController {
     }
 
     @Get(':id')
-    getPostById(@Param('id') id: string): PostInfo|string {
+    getPostById(@Param('id') id: string): PostInfo | string {
         return this.postsService.getPostById(id);
     }
 
@@ -28,8 +28,13 @@ export class PostsController {
     }
 
     @Post("/like/")
-    toggleLike(@Body() {postId, userId}: LikePostDto): any {
-        return this.postsService.toggleLike(userId,postId);
+    toggleLike(@Body() { postId, userId }: LikePostDto): any {
+        return this.postsService.toggleLike(userId, postId);
+    }
+
+    @Post("/comment/")
+    postComment(@Body() { postId, userId, commentContent }: CommentPostDto): any {
+        return this.postsService.newComment(userId, postId,commentContent);
     }
 
 }

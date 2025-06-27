@@ -1,14 +1,15 @@
-import HomePage, { HomePageProps } from "../HomePage/HomePage";
+import HomePage from "../HomePage/HomePage";
 import UserPage from "../UsersPage/userPage";
-import postsData from "../../Data/posts.json";
-import usersData from "../../Data/users.json";
-
-const posts: HomePageProps["initialPosts"] = postsData;
+import CreateAccountPage from "../CreateAccountPage/CreateAccountPage";               
+import CreatePostPage from "../CreatePostPage/CreatePostPage";               
+import ProfilePage from "../ProfilePage/ProfilePage";
 
 const Pages: Record<string, React.ReactElement> = {
-  "/posts": <HomePage initialPosts={posts} />,
-  "/users": <UserPage initialUsers={usersData} />,
-  "/profile": <div>Profile Page</div>,
+  "/posts": <HomePage/>,
+  "/users": <UserPage/>,
+  "/createPost": <CreatePostPage />,
+  "/createAccount": <CreateAccountPage />,
+  "/profile": <ProfilePage/>,
 };
 
 export default Pages;

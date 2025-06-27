@@ -28,7 +28,7 @@ export class PostsService {
         }
         return post;
     }
-    createPost({userId, text, creatorName}: CreatePostDto): PostInfo {
+    createPost({ userId, text, creatorName }: CreatePostDto): PostInfo {
         const newpost: PostInfo = {
             id: (v4() as string),
             userId: userId,
@@ -36,7 +36,7 @@ export class PostsService {
             comments: [],
             likes: [],
             creatorName: creatorName,
-            date: new Date().toISOString()
+            date: new Date().toDateString()
         };
         this.posts.push(newpost);
         return newpost;
@@ -44,18 +44,33 @@ export class PostsService {
     toggleLike(userId: string, postId: string): any {
         const user = this.usersService.getUserById(userId);
         const post = this.getPostById(postId);
-        if (!user || !post || typeof post === 'string') {
+        if (!user || !post) {
             throw new NotFoundException('Resource not found');
         } else {
+
             if (user.liked.includes(postId)) {
                 user.liked = user.liked.filter(id => id !== postId);
-                post.likes = post.likes.filter(id => id !== userId);
-            } else {
-                user.liked.push(postId);
-                post.likes.push(userId);
             }
-            return post;
+            else {
+                user.liked.push(postId);
+            }
+            if (post.likes.includes(userId))
+                post.likes = post.likes.filter(id => id !== userId);
+            else
+                post.likes.push(userId);
         }
+        return post;
+    }
+
+    newComment(userId: string, postId: string,comment: string): any {
+        const user = this.usersService.getUserById(userId);
+        const post = this.getPostById(postId);
+        if (!user || !post) {
+            throw new NotFoundException('Resource not found');
+        }
+        // Add the new comment to the post's comments array
+        post.comments.push({ userName: user.username, commentContent: comment, date: new Date().toDateString() });
+        return post;
     }
 
 }

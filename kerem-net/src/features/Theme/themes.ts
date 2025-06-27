@@ -3,7 +3,7 @@ export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-            default: '#1c1c1c',
+            default: '#121212',
         }
     },
 });
@@ -12,6 +12,8 @@ export const lightTheme = createTheme({
         mode: 'light',
         background: {
             default: 'aliceblue',
+            // paper: "#e9f6ff"
+
         }
     },
 });
