@@ -1,21 +1,21 @@
-import { useState } from "react";
-import Post, {
-  PostProps,
-} from "../Post/Post";
-
+import Post, { PostProps } from "../Post/Post";
 import "./HomePage.css";
-import { Box } from "@mui/material";
-export interface HomePageProps {
-  initialPosts: PostProps[];
-}
+import { Box, CircularProgress } from "@mui/material";
+import { useNotifications } from "@toolpad/core/useNotifications";
+import useFetch from "../../Hooks/useFetch/useFetch";
 
-const HomePage: React.FC<HomePageProps> = ({ initialPosts }) => {
-  const [posts, setPosts] = useState<PostProps[]>(initialPosts);
+const HomePage: React.FC = () => {
+  const notifications = useNotifications();
+  const { data, loading, error } = useFetch<PostProps[]>("/posts");
   return (
     <Box>
+      {
+        error && notifications.show(error, { severity: "error",autoHideDuration: 1000 })
+      }
       <div className="home-page">
+        {loading && <CircularProgress />}
         <div className="posts-container">
-          {posts.map((post, index) => (
+          {((data ?? [])).map((post, index) => (
             <Post key={index} {...post} />
           ))}
         </div>

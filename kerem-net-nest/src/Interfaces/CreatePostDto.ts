@@ -4,3 +4,4 @@ export class CreatePostDto {
   text: string;
   creatorName: string;
 }
+

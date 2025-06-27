@@ -1,16 +1,18 @@
 [
     {
         "id":"1",
-        "username": "hgfhfg",
+        "username": "1",
         "biography": "hello",
         "liked": [],
         "followers": [],
+        "password":"sdf",
         "following": []
     },
         {
         "id":"21",
         "username": "hgfhfg",
         "biography": "hello",
+        "password":"sdf",
         "liked": [],
         "followers": [],
         "following": []

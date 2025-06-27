@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import User, { UserProps } from "../User/user";
-import { Grid, TextField, Container, Card } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Container,
+  Card,
+  CircularProgress,
+} from "@mui/material";
 import "./UserPage.css";
-export interface UserPageProps {
-  initialUsers: UserProps[];
-}
+import { useNotifications } from "@toolpad/core/useNotifications";
+import useFetch from "../../Hooks/useFetch/useFetch";
 
-const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
-  const [users, setUsers] = useState(initialUsers);
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setUsers(
-      initialUsers.filter((user) =>
-        user.userName.toLowerCase().includes(e.target.value.toLowerCase())
+
+const UserPage: React.FC = () => {
+  const [filteredUsers, setFilteredUsers] = useState([] as UserProps[]);
+  const notifications = useNotifications();
+  const { data, loading, error } = useFetch<UserProps[]>("/users");
+
+  const handleTextChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFilteredUsers(
+      ((data ?? [])).filter((user) =>
+        user.username.toLowerCase().includes(e.target.value.toLowerCase())
       )
     );
   };
 
+  useEffect(() => {
+    setFilteredUsers((data ?? []));
+  }, [data]);
 
   return (
     <Container className="users-page">
@@ -23,9 +37,10 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
         <TextField
           label="Enter username"
           variant="outlined"
-          onChange={(e) => {handleTextChange(e)}}
+          onChange={handleTextChange}
         />
       </Card>
+
       <Grid
         className="users-grid"
         spacing={2}
@@ -33,10 +48,16 @@ const UserPage: React.FC<UserPageProps> = ({ initialUsers }) => {
         flexWrap="wrap"
         sx={{ padding: 2, gap: 2 }}
       >
-        {users.map((user, index) => (
+        {loading && <CircularProgress /> }
+        {filteredUsers.map((user, index) => (
           <User key={index} {...user} />
         ))}
       </Grid>
+      {error &&
+        notifications.show(error, {
+          severity: "error",
+          autoHideDuration: 1000,
+        })}
     </Container>
   );
 };

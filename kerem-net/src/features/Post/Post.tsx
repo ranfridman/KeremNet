@@ -16,11 +16,12 @@ import {
 } from "@mui/material";
 import { CommentProps } from "../Comment/Comment";
 import CommentSection from "../CommentSection/CommentSection";
+import { stringAvatar } from "../../Scripts/Avatar/StringToAvatar";
 export interface PostProps {
   text: string;
   comments: CommentProps[];
+  likes: string[];
 
-  likes: number;
   creatorName: string;
   date: string;
 }
@@ -38,11 +39,12 @@ const Post: React.FC<PostProps> = ({
       <>
         <ListItem sx={{ pl: 1 }}>
           <ListItemIcon>
-            <Avatar alt={creatorName} />
+            <Avatar  {...stringAvatar(`${creatorName}`)}/>
           </ListItemIcon>
           <ListItemText primary={creatorName} />
         </ListItem>
       </>
+
 
       <PostContent text={text} />
       <CardContent>
@@ -66,7 +68,7 @@ const Post: React.FC<PostProps> = ({
               ) : (
                 <FavoriteIcon className="post-likes" />
               )}
-              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${likes}`} />
+              <ListItemText sx={{ pl: 1 }} primary={`Likes: ${likes.length}`} />
             </ListItemIcon>
 
             <ListItemText primary={date} sx={{ textAlign: "right" }} />
@@ -81,4 +83,3 @@ const Post: React.FC<PostProps> = ({
 };
 
 export default Post;
-
