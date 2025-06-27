@@ -27,7 +27,7 @@ export class UsersController {
     createUser(@Body() user: CreateUserDto): User  {
         return this.usersService.createUser(user);
     }
-    @Get()//Post /user
+    @Post("/signIn")//Post /user
     signInUder(@Body() {username, password}: LogInDto): User  {
         return this.usersService.logIn(username, password);
     }

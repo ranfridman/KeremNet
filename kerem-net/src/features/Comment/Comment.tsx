@@ -5,6 +5,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
+import { stringAvatar } from "../../Scripts/Avatar/StringToAvatar";
 
 export interface CommentProps {
   commentContent: string;
@@ -12,13 +13,14 @@ export interface CommentProps {
   date: string;
 }
 
+
 const Comment: React.FC<CommentProps> = ({userName,commentContent,date}) => {
 
   return (
     <>
       <ListItemButton sx={{ pl: 4 }}>
         <ListItemIcon>
-            <Avatar alt={userName} />
+            <Avatar  {...stringAvatar(`${userName}`)}/>
 
     </ListItemIcon>
         <ListItemText primary={commentContent} secondary={date}/>

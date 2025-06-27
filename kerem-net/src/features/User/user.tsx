@@ -13,6 +13,7 @@ import {
   Paper,
   Chip,
 } from "@mui/material";
+import { stringAvatar } from "../../Scripts/Avatar/StringToAvatar";
 
 export interface UserProps {
   id: string;
@@ -36,7 +37,7 @@ const User: React.FC<UserProps> = ({
     <Card className="user scale" variant="elevation">
       <Stack direction={"row"} sx={{ pl: 1 }}>
         <ListItem>
-          <Avatar alt={username} ></Avatar>
+          <Avatar  {...stringAvatar(`${username}`)}/>
         </ListItem>
         <ListItem>
           <ListItemText primary={username} secondary={biography} />

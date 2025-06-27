@@ -14,10 +14,8 @@ import {
 import React from "react";
 import useStepper from "../../Hooks/useStepper/useStepper";
 import { useNotifications } from "@toolpad/core/useNotifications";
-import api from "../../Scripts/API/Api";
 import {ApiPost} from "../../Scripts/API/Api";
 const CreatePostPage = () => {
-  // const [activeStep, setActiveStep] = React.useState(0);
   const [postContent, setPostContent] = React.useState("");
   const notifications = useNotifications();
 

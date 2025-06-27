@@ -4,49 +4,55 @@ import GroupIcon from "@mui/icons-material/Group";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { useSelector } from "react-redux";
+import { RootState } from "../../Hooks/useAccount/store";
+// const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-export const NAVIGATION: Navigation = [
-  {
-    kind: "header",
-    title: "Main",
-  },
-  {
-    segment: "posts",
-    title: "Posts",
-    icon: <DashboardIcon />,
-  },
-  {
-    segment: "users",
-    title: "Users",
-    icon: <GroupIcon />,
-  },
+export function NavigationConfig(): Navigation {
+  const isLoggedIn = useSelector((state: RootState) => state.account.isLoggedIn);
 
-  {
-    kind: "divider" as const,
-  },
-  ...(isLoggedIn
-    ? [
-        {
-          segment: "createPost",
-          title: "Create Post",
-          icon: <EditNoteIcon />,
-        },
-        {
-          segment: "profile",
-          title: "Profile",
-          icon: <AccountCircleIcon />,
-        },
-      ]
-    : []),
-      ...(!isLoggedIn
-    ? [
-        {
-          segment: "createAccount",
-          title: "Create Account",
-          icon: <ExitToAppIcon />,
-        },
-      ]
-    : []),
-];
+  return [
+    {
+      kind: "header",
+      title: "Main",
+    },
+    {
+      segment: "posts",
+      title: "Posts",
+      icon: <DashboardIcon />,
+    },
+    {
+      segment: "users",
+      title: "Users",
+      icon: <GroupIcon />,
+    },
+
+    {
+      kind: "divider" as const,
+    },
+    ...(isLoggedIn
+      ? [
+          {
+            segment: "createPost",
+            title: "Create Post",
+            icon: <EditNoteIcon />,
+          },
+          {
+            segment: "profile",
+            title: "Profile",
+            icon: <AccountCircleIcon />,
+          },
+        ]
+      : []),
+    ...(!isLoggedIn
+      ? [
+          {
+            segment: "createAccount",
+            title: "Create Account",
+            icon: <ExitToAppIcon />,
+          },
+        ]
+      : []),
+  ];
+}
