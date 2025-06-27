@@ -62,4 +62,15 @@ export class PostsService {
         return post;
     }
 
+    newComment(userId: string, postId: string,comment: string): any {
+        const user = this.usersService.getUserById(userId);
+        const post = this.getPostById(postId);
+        if (!user || !post) {
+            throw new NotFoundException('Resource not found');
+        }
+        // Add the new comment to the post's comments array
+        post.comments.push({ userName: user.username, commentContent: comment, date: new Date().toDateString() });
+        return post;
+    }
+
 }

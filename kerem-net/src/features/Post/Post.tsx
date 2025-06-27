@@ -92,7 +92,7 @@ const Post: React.FC<PostProps> = ({
         </div>
       </CardContent>
 
-      <CommentSection comments={comments} />
+      <CommentSection comments={comments} postId={id} />
     </Card>
   );
 };
